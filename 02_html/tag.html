@@ -1,0 +1,107 @@
+<!-- emmet : 키워드로 html 구조 잡아주는 것 -->
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 종류</title>
+</head>
+
+<body>
+    <h1>Tag 종류에 대해 배워보자!</h1>
+    <h2>제목2</h2>
+    <h3>제목3</h3>
+    <h4>제목4</h4>
+    <h5>제목5</h5>
+    <h6>제목6</h6>
+    <p>여기는 본문태그입니다!</p>
+    <!-- p태그는 문단 자체를 집어 넣기도 함  -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p>여기는 본문태그입니다!</p>
+    <h3>오늘의 할일 </h3>
+    <!-- ul tag type attribute : disc(default) ,square, circle, none-->
+    <ul type="square">
+        <li> html 공부하기 </li>
+        <li>운동하기 </li>
+        <li>방 청소하기 </li>
+    </ul>
+
+    <h3>아이스 카페라떼 레시피</h3>
+    <!--  ol tag type attribute : 1(default),a,A,i,I -->
+    <!-- start attr : 시작번호, reverse(d): 역순으로  -->
+    <ol type="1" start="4" reverse>
+        <li><strong>우유</strong>를 <em>180ml</em> 컵에 넣기</li>
+        <li><b>얼음</b>을 가득 넣기</li>
+        <li><i>에스프레소 샷</i>을 넣어주면</li>
+        <li><u>완성!</u> <del>맛있게 드세요!</del></li>
+    </ol>
+    <!-- 수평줄 태그  -->
+    <hr>
+
+    <!-- 목록 태그의 중첩 사용 -->
+    <h3>내가 좋아하는 음식</h3>
+    <ul>
+        <li>양식
+            <ul>
+                <li>수제버거</li>
+                <li>파스타</li>
+            </ul>
+        </li>
+        <li>한식</li>
+        <ul>
+            <li>된장찌개</li>
+            <li>청국장</li>
+        </ul>
+        <li>일식</li>
+        <ul>
+            <li>초밥</li>
+            <li>우동</li>
+        </ul>
+
+        <!-- 수평줄 태그 -->
+        <hr>
+
+        <!-- 이미지 넣기  -->
+        <h1>img & a tag</h1>
+        <!-- 상대경로/절대경로  -->
+        <!-- 
+            . :현재 
+            .. :부모 
+            ./img/dog/jpeg : 현재 위치에서 img 폴더 안의 dog.jpeg 파일을 찾아라 -> 상대경로 : 파일에 따라서 경로가 달라짐 
+            절대경로 : root 부터 시작하는 경로 
+         -->
+        <!-- 상대경로로 이미지 위치찾기 >> 추천(현재 위치로부터 이미지 파일을 찾아가므로 !!) -->
+        <p>상대경로</p>
+        <img src="./img/dog.jpeg" alt="강아지" width="500" height="450">
+        <br>
+        <hr>
+        <br>
+        <!-- 절대경로로 이미지 위치찾기  -->
+        <p>절대경로 </p>
+        <img src="/Users/user/Documents/sesac--ydp-5/02_html/img/dog.jpeg" alt="강아지" width="500" height="450">
+        <!-- 절대경로 사용할때 라이브서버에선 안되서 따로열어야됨  -->
+        <!-- 현재 폴더에서 이미지폴더로 간다음에 그 아래있는 파일을 찾어라 -->
+        <!-- 근데 보통 상대경로로 씀 사용자 및 운영체제의 충돌때문에 .. 너 머하는? -->
+
+        <!-- 인터넷 주소로 이미지 설정  -->
+        <img src="data:image/png;base64,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"
+            alt="google" width="500" height="450">
+
+        <br>
+        <hr>
+        <a href="http://www.naver.com" target="_blank" title="마우스 커서를 올리면 나타남!">Naver로 이동하기(_blank) </a>
+        <br>
+        <br>
+        <hr>
+        <a href="http://www.google.com" target="_self" title="마우스 커서를 올리면 나타남!">google로 이동하기(_self) </a>
+
+
+        <a href="./html-start.html">html-start 파일로 이동하기 </a>
+</body>
+
+</html>
