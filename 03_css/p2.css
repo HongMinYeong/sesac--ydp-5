@@ -1,0 +1,36 @@
+/* *{
+    color:white;
+    background-color: gray;
+}
+#first{
+    background-color: blue;
+}
+.second{
+    background-color: green;
+}
+span{
+    background-color: red;
+} */
+
+p.lion{
+    background-color: red;
+}
+.zoo ul .lion{
+    background-color: greenyellow;
+}
+#tiger{
+    background-color: yellow;
+}
+.lion{
+    color: sienna;
+}
+.zoo .lion{
+    font-weight: bold;
+}
+#tiger +li{
+    background-color: skyblue;
+}
+.lion ~li{
+    background-color: orange;
+}
+/* A.B : A태그이자 B 클래스를 갖는 요소 */

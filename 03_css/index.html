@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 참조방식</title>
+    <!-- css 참조방식 3.링크방식 -->
+    <link rel="stylesheet" href="./index.css">
+    <!-- stylesheet를 연결하겠다 -->
+    <!-- .뜻은 현재 위치 같은 폴더 내에 있으므로 ./로 파일경로  -->
+    <!-- 가장 추천하는 방식  -->
+    <!-- 자주 사용되는 디자인의 경우 효율성이 극대화 된다.  -->
+    <!-- 내장방식과 혼합해서 많이 사용  -->
+    <!-- css 참조방식 2. 내장방식 -->
+    <style>
+        ul {
+            background-color: pink;
+        }
+    </style>
+    <!-- 유지보수성이 좋지는 않음  -->
+</head>
+
+<body>
+    <!-- css 참조방식 1. 인라인방식 -->
+    <!-- 되게 직관적이다.  -->
+    <!-- 어떤 측면에서는 수정이 빠르다  -->
+    <!-- 권장하지는 않음  -->
+    <!-- 인라인 방식이 우선순위가 제일 높기 때문에 나중에 섞어쓰면 낭패를 볼 수가 있음 -->
+    <h1 style="color: blue;">CSS 사용법을 익혀보자 !</h1>
+    <!-- 3가지 방식 혼합해도 상관 없는데 나중에 헷갈릴수 있습니다. -->
+    <ul>
+        <li>원</li>
+        <li>투</li>
+        <li>쓰리</li>
+    </ul>
+
+</body>
+
+</html>

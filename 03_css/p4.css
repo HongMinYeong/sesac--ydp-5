@@ -1,0 +1,47 @@
+ h1:hover{
+    color: red;    
+}
+a:active{
+    background-color: blue;
+}
+input:focus{
+    background-color: orange;
+}
+.links > a:visited{
+    color: #ccc; 
+    /* (두자리씩 같으면 하나로 쓸 수 있음 ) */
+}
+/* 요소 상황에 따른 가상 선택자  */
+.zoo > *{
+    background-color: green;
+    color: white;
+}
+/* E:last-child : E가 마지막 요소라면  */
+.zoo > li:last-child{
+    background-color: black;
+}
+/* E:first-child : E가 첫 요소라면  */
+.zoo *:first-child{
+    background-color: red;
+}
+/* .zoo div:first-child{
+    background-color: yellow;
+} */ 
+/* 위에꺼는 zoo 의 첫번째 자식이 div가 아니라서 적용안됨 */
+/* E:not(XYZ) : XYZ가 아닌 요소 선택  */
+.zoo *:not(div){
+    background-color: pink;
+}
+/* E:nth-child(n): E가 n번째 요소라면 선택 */
+.zoo > *:nth-child(2n){
+    background-color: aqua;
+}
+
+.stripes > *:nth-child(2n){
+    background-color: yellow;
+}
+.stripes > *:nth-child(2n+1){
+    background-color: navy;
+    color: white;
+}
+

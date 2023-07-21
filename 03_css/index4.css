@@ -1,0 +1,87 @@
+.div1{
+    width: 100px;
+    height: 100px;
+    background-color: aquamarine;
+}
+/* hover : 요소에 마우스를 올렸을 때  */
+.div1:hover{
+    background-color: hotpink;
+    height:150px;
+
+}
+/* active : 요소를 마우스로 클릭하고 있을 떄  */
+.div1:active {
+    background-color: brown;
+    width: 150px;
+}
+/* hover랑 같이하면 같이 늘어남  */
+/* color는 충돌되면 아래꺼가 우선순위 */
+/* focus : 요소에 포커스가 됐을 때 */
+input:focus{
+    background-color: blueviolet;
+    color:#ffffff;
+    outline-color: yellowgreen;
+
+}
+.links > a:hover{
+    background-color: coral;    
+}
+.links > a:visited{
+    color: #ccc; 
+    /* (두자리씩 같으면 하나로 쓸 수 있음 ) */
+}
+/* 요소 상황에 따른 가상 선택자  */
+.zoo > *{
+    background-color: green;
+    color: white;
+}
+/* E:last-child : E가 마지막 요소라면  */
+.zoo > li:last-child{
+    background-color: black;
+}
+
+/* 무언가를 특정하고 있으면 -> 1개만 해당  */
+/* E:first-child : E가 첫 요소라면  */
+.zoo *:first-child{
+    background-color: red;
+}
+/* .zoo div:first-child{
+    background-color: yellow;
+} */ 
+/* 위에꺼는 zoo 의 첫번째 자식이 div가 아니라서 적용안됨 */
+/* E:not(XYZ) : XYZ가 아닌 요소 선택  */
+.zoo *:not(div){
+    background-color: pink;
+}
+/* E:nth-child(n): E가 n번째 요소라면 선택 */
+.zoo > *:nth-child(2n){
+    background-color: aqua;
+}
+.box::before{
+    content:'택시 ~';
+    font-weight: bold;
+    color: red;
+}
+
+.box::after{
+    content:'빨리!!';
+    font-weight: bold;
+    color: blue !important; 
+    /* important 별로 좋진 않음  
+        급할 때만 쓰삼 
+        */
+}
+[disabled]{
+    background-color:red;
+}
+[placeholder="이름"]{
+    background-color: orange;
+}
+
+input:not([placeholder]){
+    background-color: blue;
+}
+
+
+
+
