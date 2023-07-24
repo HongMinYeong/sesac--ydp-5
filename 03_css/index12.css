@@ -8,7 +8,8 @@
     - animation-timing-function: 중간 상태들의 전환을 어떤 시간 간격으로 진행할지 지정
         - linear, ease, ease-in, ease-out, ease-in-out 등
     - animation-direction: 애니메이션 종류 후 반복될 때 진행방향 지정
-    -   normal, reverse, alternate, alternate-reverse 
+    -   normal (쓸일 없으세요), reverse, alternate(반복될때마다 방향 바꿔줌), alternate-reverse 
+    - alternate : from -> to 방향으로 애니메이션 진행 -> (다음 회차) to -> from 방향을 바꿔가며 반복 
 */
 .box{
     width: 100px;
@@ -23,8 +24,8 @@
     animation-delay: 1s;
     animation-iteration-count: infinite;
     /* 부드럽게 왔다갔다 */
-    /* animation-timing-function: linear; */
-    animation-timing-function: ease-in-out;
+    animation-timing-function: linear;
+    /* animation-timing-function: ease-in-out; */
     
 }
 /* my-anim: 애니메이션의 이름 (개발자 마음대로 짓기) */
@@ -45,5 +46,54 @@
     }
     100%{
         left: 0px;
+    }
+}
+.bounce-ball1{
+    position: relative;
+    left: 100px;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: black;
+    /* animation-name: bounce1;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate; */
+
+    /* 애니메이션 단축 프로퍼티  */
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    animation: bounce1 0.5s ease-out 1s infinite alternate;
+}
+@keyframes bounce1 {
+    to{
+        top: 50px;
+    }
+    from{
+        top: 300px;
+    }
+}
+.bounce-ball2{
+    width: 50px;
+    height: 50px;
+    background-color: tomato;
+    border-radius: 50%;
+    /* 바닥을 기준으로 body 를 기준으로 잡기  */
+    position: absolute;
+    animation-name: bounce2;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
+@keyframes bounce2 {
+    from, to {
+        bottom: 0px;
+        /* 0px 에서 정상속도로 시작 -> 속도 줄이면서 300px 됨  */
+        animation-timing-function: ease-out;
+    }
+    50%{
+        bottom: 300px; 
+         /* 300ox에서 천천히 시작해서 -> 0px로 가면서 정상속도로 끝  */
+        animation-timing-function: ease-in;
     }
 }
