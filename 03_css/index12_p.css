@@ -1,14 +1,14 @@
 .box{
     position: relative;
-    left: 100px;
-    top: 0;
+    left: 0;
+    top: 50px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
     background-color: pink;
     animation-name: ball;
     animation-duration: 3s;
-     animation-delay: 1s;
+     animation-delay: 0s;
     animation-iteration-count: 6;
     animation-timing-function: linear;
     
@@ -19,16 +19,16 @@
         top: 0px;
     }
     25%{
-        left: 900px;
+        left: 200px;
         top: 0px;
     }
     50%{
-        left: 900px;
-        top: 1000px;
+        left: 200px;
+        top: 200px;
     }
     75%{
         left:0px;
-        top: 1000px;
+        top: 200px;
     }
     100%{
        left: 0px;
@@ -37,12 +37,12 @@
 }
 .box2{
     position: relative;
-    font-size: 30px;
+    font-size: 20px;
     animation-name: Lorem;
     animation-duration: 3s;
     animation-delay: 0s;
     animation-iteration-count: infinite;
-    
+
 
 }
 @keyframes Lorem {
@@ -51,7 +51,7 @@
         width: 300%;
     }
     100%{
-        margin-left:0%;
+        magin-left:0%;
         width:100%;
     }
 }
