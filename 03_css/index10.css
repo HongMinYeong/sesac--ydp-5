@@ -1,0 +1,58 @@
+.d-inline1 {
+    display: inline;
+    background-color: blue;
+}
+/* div 는 block 요소  */
+/* inline울 자종허묜 span 태그 처럼 바뀐다.  */
+.d-inline2 {
+    display: inline;
+    background-color: red;
+}
+.d-block1{
+    display: block;
+    background-color: blue;
+    width: 500px;
+    /* width를 줄여도 무조건 개행처리는 됨  */
+}
+
+.d-block2{
+    display: block;
+    background-color: red;
+    width: 400px;
+}
+
+ /* inline특성은 가진채로 block 형태가 됨 -> 개행처리 x */
+.d-inline-block1{
+    display: inline-block;
+    background-color:blue ;
+}
+.d-inline-block2{   
+    display: inline-block;
+    background-color: red;
+    width: 200px;
+    height: 300px;
+    /* margin: 20px; */
+    /* CSS 단축 프로퍼티  */
+    /* margin-top: 20px; */
+    /* margin-bottom: 20px; */
+    /* margin-right: 40px; */
+    /* margin-left: 40px; */
+    /* margin: 20px 40px 20px 40px; */
+    margin: 20px 40px; 
+}
+.d-none{
+    display: none;
+    background-color: green;
+    width: 100px;
+    height: 100px;
+
+}
+/* none 과 hidden의 차이  */
+/* 보이진 않는데 공간은 차지함 */
+.box{
+    /* visibility: hidden; */
+    visibility: visible;
+    background-color: violet;
+    width: 100px;
+    height: 100px;
+}
