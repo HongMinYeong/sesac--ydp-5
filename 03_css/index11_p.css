@@ -51,6 +51,8 @@ header{
 .header3{
     display: flex;
     justify-content: space-between;
+    /* justify-content: space-around; */
+
 
 }
 .header3 .menu-left{

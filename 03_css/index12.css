@@ -1,0 +1,49 @@
+/*  - animation-name: @keyframes 애니메이션 이름 지정
+        - 시작: from or 0%
+        - 중간: 0~100%
+        - 끝: to or 100%
+    - animation-duration: 한 사이클의 애니메이션이 얼마에 걸쳐 일어날지 결정 (단위: s)
+    - animation-delay: 요소(element)가 로드된 후, 언제 애니메이션을 시작할지 결정 (단위: s)
+    - animation-iteration-count: 애니메이션 반복 횟수 (default: 1, infinite: 무한 반복)
+    - animation-timing-function: 중간 상태들의 전환을 어떤 시간 간격으로 진행할지 지정
+        - linear, ease, ease-in, ease-out, ease-in-out 등
+    - animation-direction: 애니메이션 종류 후 반복될 때 진행방향 지정
+    -   normal, reverse, alternate, alternate-reverse 
+*/
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: cyan;
+    /* 자기 위치에서 왔다가 갔다가 해야됨  */
+    position: relative;
+
+    animation-name: my-anim;
+    animation-duration: 2s;
+    /* 1초 기다렸다가 실행  */
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    /* 부드럽게 왔다갔다 */
+    /* animation-timing-function: linear; */
+    animation-timing-function: ease-in-out;
+    
+}
+/* my-anim: 애니메이션의 이름 (개발자 마음대로 짓기) */
+@keyframes my-anim {
+    /* 총 다섯단계의 애니메이션 */
+    0%{
+        /* position relative가 있기 떄문에 유효함  */
+        left: 0px;
+    }
+    25%{
+        left: 200px;
+    }
+    50%{
+        left: 400px;
+    }
+    75%{
+        left: 200px;
+    }
+    100%{
+        left: 0px;
+    }
+}
