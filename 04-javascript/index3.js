@@ -219,7 +219,7 @@ console.log(typeof undefined);//undefined
 console.log(typeof cat); //object
 console.log(typeof fruits); //object
 
-
+// =======================자료형 실습====================================== 
 const interests = ['tv', 'music', 'sleep'];
 const me = {
     name: 'min-0',
@@ -228,3 +228,45 @@ const me = {
     interests,
 };
 console.log(me);
+// =======================자료형 실습====================================== 
+
+console.log('=================================================================================');
+//형변환
+// 성적 평균 구하는 프로그램 만들기 
+// let mathScore = prompt("수학 점수를 입력 하세요 ");
+// console.log(mathScore, typeof mathScore);
+// let engScore = prompt("영어 점수를 입력 하세요 ");
+// console.log(engScore, typeof engScore);
+// let avg = (mathScore + engScore) / 2;
+// console.log(`수학과 영어 점수의 평균은 ${avg}입니다~`);
+//${}쓸떄  ` 꼭 사용
+
+
+//1.String() : 문자로 형변환
+let str1 = true;
+let str2 = 123;
+let str3 = null;
+
+console.log(String(str1), typeof String(str1));
+console.log(String(str2), typeof String(str2));
+console.log(String(str3), typeof String(str3));
+console.log(str1.toString(), typeof str1.toString);
+
+//2.Number(): 숫자로 형변환
+let n1 = true;
+let n2 = false;
+let n3 = '123.9';
+
+console.log(Number(n1), typeof Number(n1)); //1
+console.log(Number(n2), typeof Number(n2));//0
+console.log(Number(n3), typeof Number(n3));//123.9
+console.log(parseInt(n3, 10)); // n3 값을 10진수의 정수 (int)로 바꾸겠다. => 123 
+console.log(parseFloat(n3)); // n3 값을 실수(float)로 바꾸겠다. => 123.9
+
+
+// =======================형변환 실습====================================== 
+let mathScore = prompt("수학 점수를 입력 하세요 ");
+let engScore = prompt("영어 점수를 입력 하세요 ");
+let avgScore = (Number(mathScore) + Number(engScore)) / 2;
+console.log(`수학과 영어 점수의 평균은 ${avgScore} 입니다.~`);
+// =======================형변환 실습====================================== 
