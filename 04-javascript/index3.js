@@ -275,5 +275,7 @@ console.log(`수학과 영어 점수의 평균은 ${avgScore} 입니다.~`);
 // =======================형변환 실습====================================== 
 
 // +) null, undefined를 숫자로 바꾼다면?
-console.log(Number(undefined), typeof Number(undefined));
-console.log(Number(null), typeof Number(null));
+console.log(Number(undefined), typeof Number(undefined)); //NaN 'number'
+//Not - A- Number (숫자가 아님)
+console.log(Number(null), typeof Number(null)); //0 'number'
+
