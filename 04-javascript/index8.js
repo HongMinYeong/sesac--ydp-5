@@ -43,3 +43,42 @@ console.log(date.split('3'));
 
 // repeat()
 console.log('hi'.repeat(5));
+
+//////////////////////////////////////////////////////////
+//배열 내장 메서드 
+
+let arr1 = [1, 2, 3, 4, 5];
+let arr2 = ['quokka', 'rabbit', 'puppy', 'hamster'];
+
+//배열에 값 추가 
+// arr1[5] = 6; //arr1 배열의 5번 인덱스에 6이라는 값 추가
+// arr1[8] = 100; //인덱스 건너뛰면 빈 값(empty)이 들어가게 됨
+
+//push():끝에 요소 추가
+arr1.push(6);
+arr1.push(10);
+console.log(arr1);
+
+//pop(): 맨 끝 요소 제거
+arr1.pop()
+console.log(arr1);
+
+//unshift() : 맨 앞에 요소 추가
+arr1.unshift('cat');
+console.log(arr1);
+//shift() : 맨 앞에 요소 제거
+arr1.shift('cat');
+console.log(arr1);
+
+//includes(요소) : 요소 있는지 없는지 검사 (true, false)
+console.log(arr2.includes('quokka'));
+console.log(arr2.includes('apple'));
+
+//reverse()
+console.log(arr1.reverse());
+console.log(arr1); //원본 배열이 변경된 것
+
+// join(): join 안의 문자열 기준으로 병합
+console.log(arr2);
+console.log(arr2.join(''));
+console.log(arr2.join('-'));
