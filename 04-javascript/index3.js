@@ -265,8 +265,15 @@ console.log(parseFloat(n3)); // n3 값을 실수(float)로 바꾸겠다. => 123.
 
 
 // =======================형변환 실습====================================== 
-let mathScore = prompt("수학 점수를 입력 하세요 ");
-let engScore = prompt("영어 점수를 입력 하세요 ");
-let avgScore = (Number(mathScore) + Number(engScore)) / 2;
+// let mathScore = prompt("수학 점수를 입력 하세요 ");
+// let engScore = prompt("영어 점수를 입력 하세요 ");
+let mathScore = Number('77');
+let engScore = Number('88');
+// let avgScore = (Number(mathScore) + Number(engScore)) / 2;
+let avgScore = (mathScore + engScore) / 2;
 console.log(`수학과 영어 점수의 평균은 ${avgScore} 입니다.~`);
 // =======================형변환 실습====================================== 
+
+// +) null, undefined를 숫자로 바꾼다면?
+console.log(Number(undefined), typeof Number(undefined));
+console.log(Number(null), typeof Number(null));
