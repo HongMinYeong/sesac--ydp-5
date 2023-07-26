@@ -82,3 +82,8 @@ console.log(arr1); //원본 배열이 변경된 것
 console.log(arr2);
 console.log(arr2.join(''));
 console.log(arr2.join('-'));
+
+//메서드 체이닝(method chaining)
+console.log('hello'.split(''));
+console.log('hello'.split('').reverse());
+console.log('hello'.split('').reverse().join(''));
