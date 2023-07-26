@@ -134,7 +134,97 @@ console.log(q2);
 
 
 // Q3. 다음 코드 실행시 q3 변수는 어떤 값이 될까?
-const q3 = 1;
-q3 = q3 + 1;
-console.log(q3);
+//const q3 = 1;
+//q3 = q3 + 1;
+//console.log(q3);
 //error 
+
+// 6. array
+// 배열의 이름 : fruits
+// 배열의 원소(아이템): 배열 안에 있는 데이터 하나하나 
+// 배열의 위치(index):0부터 시작
+// 배열의 길이(크기) : 원소의 갯수와 동일 
+const fruits = ['orange', 'pineapple', 'grape', 'apple'];
+// const fruits2 = new Array('orange', 'pineapple', 'grape', 'apple');
+// 그냥 이렇게 배열 할 수도 있다. 
+console.log(fruits);
+console.log(fruits[0]); // 0번 위치에 해당하는 원소를 출력 
+
+//js에서는 배열 원소의 자료형이 달라도 됨!
+const data = [1, 'allie', false, null, undefined];
+console.log(data);
+
+//Array 안에 Array 들어갈 수 있음 (중첩 가능) => 2차원 배열
+const korean = [
+    ['가', '나', '다'],
+    ['라', '마', '바'],
+    ['사', '아', '자'],
+];
+console.log(korean);
+console.log(korean[0]); //['가', '나', '다']
+console.log(korean[1]); //['라', '마', '바']
+console.log(korean[2]); //['사', '아', '자']
+
+console.log(korean[0][2]); //다
+
+//퀴즈 korean 배열에서 '가자'글씨 출력하기 
+console.log(korean[0][0] + korean[2][2]);
+
+//퀴즈 3차원 배열에서 '8' 출력
+const nums = [
+    [
+        [1, 2, 3],
+        [4, 5, 6],
+    ],
+    [
+        [7, 8, 9],
+        [10, 11, 12],
+    ],
+];
+console.log(nums[1][0][1]);
+
+// 7. object (key : value)
+const cat = {
+    name: '나비',
+    age: 1,
+    isCute: true,
+    mew: function () {
+        return '냐옹';
+    },
+};
+console.log(cat); //object 자체를 출력 
+
+//object 의 속성(key)에 접근하는 방법
+//(1) 점 표기법 (.)
+console.log(cat.name);
+console.log(cat.age);
+console.log(cat.isCute);
+console.log(cat.mew());
+//(2) 대괄호 표기법 ([])
+console.log(cat['name']);
+//key가 변수에 저장되어 있을때 주로 사용
+const tempVal = 'name';
+console.log(cat[tempVal]); //cat['name']-> cat.name과 동일 
+
+//typeof : 자료형 확인할 수 있는 키워드
+//-typeof x 
+//-typeof (x)
+console.log(typeof '문자'); //string
+console.log(typeof 12345);//number
+console.log(typeof 3.14); //number
+console.log(typeof true);//boolean
+console.log(typeof false);//boolean
+console.log(typeof null);//object ** js 공식적으로 인정한 언어 자체의 오류 
+console.log(typeof undefined);//undefined
+console.log(typeof cat); //object
+console.log(typeof fruits); //object
+
+
+const interests = ['tv', 'music', 'sleep'];
+const me = {
+    name: 'min-0',
+    isLeader: false,
+    job: 'student',
+    interests,
+};
+console.log(me);
