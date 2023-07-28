@@ -45,12 +45,12 @@ console.log(date.split('3'));
 console.log('hi'.repeat(5));
 
 //////////////////////////////////////////////////////////
-//배열 내장 메서드 
+//배열 내장 메서드
 
 let arr1 = [1, 2, 3, 4, 5];
 let arr2 = ['quokka', 'rabbit', 'puppy', 'hamster'];
 
-//배열에 값 추가 
+//배열에 값 추가
 // arr1[5] = 6; //arr1 배열의 5번 인덱스에 6이라는 값 추가
 // arr1[8] = 100; //인덱스 건너뛰면 빈 값(empty)이 들어가게 됨
 
@@ -60,7 +60,7 @@ arr1.push(10);
 console.log(arr1);
 
 //pop(): 맨 끝 요소 제거
-arr1.pop()
+arr1.pop();
 console.log(arr1);
 
 //unshift() : 맨 앞에 요소 추가
@@ -87,3 +87,89 @@ console.log(arr2.join('-'));
 console.log('hello'.split(''));
 console.log('hello'.split('').reverse());
 console.log('hello'.split('').reverse().join(''));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 배열에서 반복문 사용하기!
+// -기본 for 문
+// -for of 문
+// -forEach() 메서드
+
+const arr3 = [1, 2, 5, 6, 7];
+const alphabets = ['a', 'b', 'c', 'd'];
+
+//기본 for 문
+for (let a = 0; a < arr3.length; a++) {
+  console.log(arr3[a]);
+}
+
+//for of 문
+for (let alpha of alphabets) {
+  console.log(alpha);
+}
+
+//forEach() 메서드
+alphabets.forEach(function (alpha, idx) {
+  //alpha:currentValue 를 의미. 반복하고 있는 현재 요소
+  //idx : currentValue의 인덱스(위치)
+  console.log(alpha, idx);
+});
+
+alphabets.forEach(function (alpha, idx, arr) {
+  //alpha:currentValue 를 의미. 반복하고 있는 현재 요소
+  //idx : currentValue의 인덱스(위치)
+  //arr : forEach를 호출한 배열
+  console.log(alpha, idx, arr);
+});
+
+let numbers = [1, 2, 3, 4, 5, 6];
+var sum1 = 0;
+var sum2 = 0;
+var sum3 = 0;
+
+for (let i = 0; i < numbers.length; i++) {
+  console.log(numbers[i]);
+  sum1 += numbers[i];
+}
+
+for (let num of numbers) {
+  sum2 += num;
+}
+
+// numbers.forEach(function (num) {
+//   sum3 += num;
+// });
+
+numbers.forEach((num) => {
+  sum3 += num;
+});
+
+console.log(sum1, sum2, sum3);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+console.log('--------------------');
+//배열에서의 기타 메소드
+//map, filter, find 메서드
+const arr4 = [1, 2, 3, 4, 5];
+
+//map() : 배열 내 모든 원소에 대해 연산한 결과를 모아 "새로운 배열" 반환
+// const map_result = arr4.map(function (e) {
+//   return e * 2;
+// });
+
+const map_result = arr4.map((e) => e * 2);
+console.log(map_result);
+
+//filter() : 주어진 함수의 테스트(조건)를 통과하는 요소를 모아
+//(조건 통과하면 요소 유지, 미통과하면 요소 버림) " 새로운 배열" 반환
+// const filter_result = arr4.filter(function (e) {
+//   return e > 2;
+// });
+const filter_result = arr4.filter((e) => e > 2);
+console.log(filter_result);
+
+//find() : 특정 조건을 만족하는 '첫번째 요소' 반환
+// const find_result = arr4.find(function (e) {
+//   return e > 2;
+// });
+const find_result = arr4.find((e) => e > 2);
+console.log(find_result);
