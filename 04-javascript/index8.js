@@ -149,6 +149,7 @@ console.log(sum1, sum2, sum3);
 console.log('--------------------');
 //배열에서의 기타 메소드
 //map, filter, find 메서드
+//매개변수로 익명함수가 들어간다는 공통점이 있다.
 const arr4 = [1, 2, 3, 4, 5];
 
 //map() : 배열 내 모든 원소에 대해 연산한 결과를 모아 "새로운 배열" 반환
@@ -185,9 +186,22 @@ const q_filter_re = words.filter((word) => word.length > 3);
 console.log(q_filter_re);
 
 // 2. 글자에 'a' 문자가 포함되어 있는 단어만 필터링 -> includes() 메소드
+//'str'.includes() : true, false 반환 메서드
+//filter -> 조건 통과하면 요소 유지, 미통과하면 요소 버림
+//map은 조건이 true가 되면 그대로 true 반환
 const a_filter_re = words.filter((e) => e.includes('a'));
 console.log(a_filter_re);
 
-//filter map 차이
-//filter 값이 true 면 그 요소 유지
-//map은 조건이 true가 되면 그대로 true 반환
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//for in 반복문
+//객체의 key를 반복할 수 있는 구문
+
+const me = { name: 'sean', gender: 'f', hobby: 'movie' };
+for (let key in me) {
+  console.log(key, me[key]);
+  //대괄호 표기법
+  //object 의 속성(key)에 접근하는 방법
+  //index3.js -197 line 참고
+  //key : key
+  //value : me[key]
+}
