@@ -167,9 +167,27 @@ console.log(map_result);
 const filter_result = arr4.filter((e) => e > 2);
 console.log(filter_result);
 
-//find() : 특정 조건을 만족하는 '첫번째 요소' 반환
+//find() : 특정 조건을 만족하는 '첫번째 요소 (값)' 반환
 // const find_result = arr4.find(function (e) {
 //   return e > 2;
 // });
 const find_result = arr4.find((e) => e > 2);
 console.log(find_result);
+
+console.log('--------------------');
+//퀴즈
+//
+const words = ['dog', 'cat', 'rabbit', 'apple', 'wow'];
+
+// 1. 글자 수가 3개 초과인 단어만 필터링 -> length 속성
+// const q_filter_re = words.filter((word) => word.length > 3);
+const q_filter_re = words.filter((word) => word.length > 3);
+console.log(q_filter_re);
+
+// 2. 글자에 'a' 문자가 포함되어 있는 단어만 필터링 -> includes() 메소드
+const a_filter_re = words.filter((e) => e.includes('a'));
+console.log(a_filter_re);
+
+//filter map 차이
+//filter 값이 true 면 그 요소 유지
+//map은 조건이 true가 되면 그대로 true 반환
