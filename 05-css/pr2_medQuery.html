@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>크기에 따라 자리 바꾸기</title>
+    <style>
+      /* 실습2 */
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .boxx {
+        width: 200px;
+        height: 200px;
+        border-radius: 10px;
+        margin-left: 30px;
+      }
+
+      /* 브라우저 넓이가 700px 초과일때  */
+      @media (min-width: 700px) {
+        .boxx {
+          background-color: black;
+          border: solid 2px;
+          border-color: red;
+        }
+      }
+      /* 브라우저 넓이가 700px 이하일때  */
+      @media (max-width: 700px) {
+        .container {
+          flex-direction: column;
+        }
+        .boxx {
+          margin-top: 10px;
+          background-color: skyblue;
+          border: solid 2px;
+          border-color: red;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="boxx">1</div>
+      <div class="boxx">2</div>
+      <div class="boxx">3</div>
+    </div>
+  </body>
+</html>

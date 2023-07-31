@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>헤더 만들기</title>
+    <style>
+      .Header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        background-color: rgb(59, 108, 186);
+      }
+      .menus {
+        font-weight: bold;
+      }
+      img {
+        position: absolute;
+        left: 10%;
+      }
+      @media (max-width: 768px) {
+        .Header {
+          flex-direction: column;
+        }
+        .Header img {
+          position: relative;
+        }
+
+        .icon {
+          background-color: rgb(59, 108, 186);
+        }
+      }
+
+      @media (max-height: 768px) {
+        .Header {
+          height: 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="Header">
+      <div class="icon">
+        <img src="./pooh.png" width="40" height="40" alt="아이콘" />
+      </div>
+      <div class="menus">메뉴1</div>
+      <div class="menus">메뉴2</div>
+      <div class="menus">메뉴3</div>
+      <div class="menus">메뉴4</div>
+    </header>
+  </body>
+</html>

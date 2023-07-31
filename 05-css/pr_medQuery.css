@@ -1,0 +1,28 @@
+/* 실습1 */
+/* 화면 넓이가 500px 이상일 경우  */
+/* @media (min-width: 500px) {
+  body {
+    background-color: skyblue;
+  }
+}
+@media (max-width: 300px) {
+  body {
+    background-color: orange;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 500px) {
+  body {
+    background-color: none;
+  }
+}
+@media (max-height: 300px) {
+  p {
+    font-style: italic;
+  }
+}
+@media (min-height: 500px) {
+  p {
+    background-color: green;
+  }
+} */
