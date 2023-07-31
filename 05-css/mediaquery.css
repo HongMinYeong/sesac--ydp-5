@@ -46,3 +46,16 @@
     width: 100%;
   }
 }
+/* 가로 세로 모드  */
+/* Landscape(가로) 모드일 때 적용할 CSS */
+@media screen and (orientation: landscape) {
+  body {
+    background-color: bisque;
+  }
+}
+/* portrait(세로) 모드일 때 적용할 css */
+@media screen and (orientation: portrait) {
+  body {
+    background-color: tomato;
+  }
+}
