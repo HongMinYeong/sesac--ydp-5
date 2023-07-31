@@ -6,35 +6,51 @@
     <title>헤더 만들기</title>
     <style>
       .Header {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: skyblue;
         height: 100px;
-        background-color: rgb(59, 108, 186);
       }
       .menus {
+        display: flex;
         font-weight: bold;
       }
-      img {
-        position: absolute;
-        left: 10%;
+
+      .menus div {
+        margin-left: 20px;
       }
+
+      .Header .icon {
+        width: 70%;
+        position: absolute;
+      }
+      .icon img {
+        width: 50px;
+      }
+      /* width가 768이하일 때  */
       @media (max-width: 768px) {
         .Header {
-          flex-direction: column;
-        }
-        .Header img {
+          height: 60px;
           position: relative;
         }
-
-        .icon {
-          background-color: rgb(59, 108, 186);
+        Header .icon {
+          display: flex;
+          justify-content: center;
         }
-      }
 
-      @media (max-height: 768px) {
-        .Header {
-          height: 60px;
+        .Header .menus {
+          position: absolute;
+          flex-direction: column;
+          align-items: center;
+          background-color: aliceblue;
+          width: 100%;
+          top: 100%;
+          font-weight: normal;
+        }
+        .menus div {
+          margin: 10px;
         }
       }
     </style>
@@ -42,12 +58,16 @@
   <body>
     <header class="Header">
       <div class="icon">
-        <img src="./pooh.png" width="40" height="40" alt="아이콘" />
+        <div class="img">
+          <img src="./igloo.png" alt="아이콘" />
+        </div>
       </div>
-      <div class="menus">메뉴1</div>
-      <div class="menus">메뉴2</div>
-      <div class="menus">메뉴3</div>
-      <div class="menus">메뉴4</div>
+      <div class="menus">
+        <div>메뉴1</div>
+        <div>메뉴2</div>
+        <div>메뉴3</div>
+        <div>메뉴4</div>
+      </div>
     </header>
   </body>
 </html>
