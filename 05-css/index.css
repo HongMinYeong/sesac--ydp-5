@@ -1,0 +1,8 @@
+/* bootstrap 외 스타일 */
+.progress-bar-height {
+  height: 5px;
+}
+
+.card_container {
+  display: flex;
+}
