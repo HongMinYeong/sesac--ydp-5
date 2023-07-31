@@ -21,6 +21,106 @@
     ></script>
   </head>
   <body>
-    <h1>Utilities</h1>
+    <h1>Grid System</h1>
+    <br />
+    <!-- bootstrap은 12칸을 기준으로 나눔  -->
+    <!-- col -->
+    <div class="container bg-dark">
+      <!-- fluid 하면 꽉참 ex ) container-fluid -->
+      <div class="row">
+        <div class="col py-3 bg-success"></div>
+        <div class="col py-3 bg-warning"></div>
+        <div class="col py-3 bg-info"></div>
+        <div class="col py-3 bg-success"></div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-4 py-3 bg-success"></div>
+        <div class="col-4 py-3 bg-warning"></div>
+        <div class="col-4 py-3 bg-info"></div>
+        <div class="col-4 py-3 bg-info"></div>
+      </div>
+      <br />
+      <div class="row">
+        <!-- 3:1로 차지  -->
+        <div class="col-9 py-3 bg-success"></div>
+        <div class="col-3 py-3 bg-warning"></div>
+      </div>
+      <br />
+      <!-- gutter -->
+      <main class="row g-4">
+        <!-- 3:1로 차지  -->
+        <section class="col-3 py-3 bg-success">
+          section -> Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+          Modi, eaque illo saepe, dolor vel facere unde deserunt fugiat omnis
+          animi eum quis facilis dicta, nulla optio vitae? Inventore, nihil!
+          Facere iure cupiditate laboriosam fugit temporibus maxime provident
+          aliquam facilis excepturi.
+        </section>
+        <aside class="col-9 py-3 bg-warning">
+          aside -> Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Debitis dicta, veniam nesciunt voluptates ipsa maiores dolore
+          pariatur. Laudantium reprehenderit nam laboriosam assumenda architecto
+          dicta tempora id. In quibusdam doloremque suscipit, deleniti eos nihil
+          animi asperiores. Quae optio molestiae quia, culpa sint tempora minus
+          voluptates commodi laudantium, vitae, officia beatae. Dolor?
+        </aside>
+      </main>
+      <br />
+
+      <div class="row">
+        <div class="col py-3 bg-success"></div>
+        <div class="col-7 py-3 bg-warning"></div>
+        <div class="col py-3 bg-info"></div>
+      </div>
+      <br />
+
+      <!-- row 중첩 grid -->
+      <div class="row bg-danger p-2">
+        <div class="col-8 bg-warning">
+          col-8
+          <div class="row">
+            <div class="col-6 py-3 bg-light">col-6</div>
+            <div class="col-6 py-3 bg-info">cpl-6</div>
+          </div>
+        </div>
+        <div class="col-4 bg-success">col-4</div>
+      </div>
+      <br />
+
+      <div class="row">
+        <!-- 브라우저 너비가 sm 사이즈(576) 이상일때 -->
+        <!-- breakpoint -->
+        <div class="col-sm-9 bg-danger">col-sm-9</div>
+        <div class="col-sm-3 bg-primary">col-sm-3</div>
+      </div>
+      <br />
+
+      <div class="row">
+        <div class="col-sm bg-success">col-sm</div>
+        <div class="col-sm bg-warning">col-sm</div>
+        <div class="col-sm bg-success">col-sm</div>
+      </div>
+      <br />
+      <div class="row">
+        <!-- 작아지면 6씩 1:1 로 배치  -->
+        <div class="col-6 col-sm-9 bg-danger">col-sm-9</div>
+        <div class="col-6 col-sm-3 bg-primary">col-sm-3</div>
+      </div>
+      <br />
+      <!--  브라우저 너비가 lg 사이즈(992) 이상일때 -->
+      <div class="row">
+        <div class="col-5 col-lg-9 bg-danger">col-lg-9</div>
+        <div class="col-7 col-lg-3 bg-primary">col-lg-3</div>
+      </div>
+      <br />
+      <div class="row">
+        <!-- breakpoint 다양하게 넣을 수도 있다.  -->
+        <!-- md -> 768이상 -->
+        <!-- lg ->992이상-->
+        <div class="col col-sm-9 col-md-6 col-lg-4 bg-info">1</div>
+        <div class="col col-sm-3 col-md-6 col-lg-8 bg-danger">2</div>
+      </div>
+    </div>
   </body>
 </html>
