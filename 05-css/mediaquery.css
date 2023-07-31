@@ -1,0 +1,48 @@
+.header {
+  background-color: palegoldenrod;
+  height: 120px;
+}
+
+.main {
+  background-color: aqua;
+  display: flex;
+}
+.section {
+  background-color: cornflowerblue;
+  width: 80%;
+}
+
+.aside {
+  background-color: hotpink;
+  width: 20%;
+}
+
+.footer {
+  background-color: chartreuse;
+}
+
+/* 미디어 쿼리  */
+@media (max-width: 480px) {
+  /* viewport width가 480px 이하일 때 
+    이 안에있는 속성 적용하겠다.  
+    */
+  .header {
+    height: 60px;
+  }
+  .main {
+    flex-direction: column-reverse;
+  }
+  /*
+  .aside {
+    display: none;
+  }
+*/
+  /* none은 자리마저 없애고 hidden은 자리는 있는데 안보임  */
+  .aside {
+    width: 100%;
+  }
+
+  .section {
+    width: 100%;
+  }
+}
