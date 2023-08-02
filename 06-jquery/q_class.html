@@ -43,24 +43,21 @@
       // .bg-orange 클래스 있다면, .bg-orange 제거, .bg-yellow 추가
       // .bg-yellow 클래스 있다면, .bg-yellow 제거, .bg-red 추가
       const box = $('.box');
+
       function changeColor() {
-        if (box.hasClass('bg_red')) {
-          console.log('작동해유22');
-          box.removeClass('bg_red');
-          box.addClass('bg_orange');
-        } else if (box.hasClass('bg_orange')) {
-          box.removeClass('bg_orange');
-          box.addClass('bg_yellow');
-        } else if (box.hasClass('bg_yellow')) {
-          box.removeClass('bg_yellow');
-          box.addClass('bg_red');
+        if (box.hasClass('bg-red')) {
+          box.removeClass('bg-red');
+          box.addClass('bg-orange');
+        } else if (box.hasClass('bg-orange')) {
+          box.removeClass('bg-orange');
+          box.addClass('bg-yellow');
+        } else if (box.hasClass('bgyellow')) {
+          box.removeClass('bg-yellow');
+          box.addClass('bg-red');
         }
       }
 
       box.click(changeColor);
-      //   box.click(function () {
-      //     console.log('눌렷지롱');
-      //   });
     </script>
   </body>
 </html>
