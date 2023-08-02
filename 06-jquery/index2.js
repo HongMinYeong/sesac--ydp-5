@@ -144,3 +144,24 @@ function afterJS() {
 function afterJquery() {
   $('.green').after('<li>jquery로 after 완!</li>');
 }
+
+function removeJS() {
+  //li2 아이디를 갖는 요소를 선택
+  const li2 = document.querySelector('#li2');
+  li2.remove();
+}
+
+function removeJquery() {
+  $('#li2').remove();
+}
+
+function emptyJS() {
+  //ul태그 이자 num 클래스를 갖는 요소 선택
+  const nums = document.querySelector('ul.nums');
+  //   해당 요소의 HTML을 빈 문자열 '' 로 설정(innerHTML)
+  nums.innerHTML = '';
+}
+
+function emptyJquery() {
+  $('ul.nums').empty();
+}
