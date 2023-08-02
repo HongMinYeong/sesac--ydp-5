@@ -110,3 +110,37 @@ function prependJS() {
 function prependJquery() {
   $('.colors').prepend('<li>jquery 로 prepend 완!</li>');
 }
+
+// before()
+function beforeJS() {
+  // 1. green 클래스를 갖는 요소 선택하고
+  const green = document.querySelector('.green');
+  // 2. li 태그 요소를 생성한 후
+  const li = document.createElement('li');
+  // 3. li 태그의 텍스트로 'green 클래스를 갖는 요소의 이전 형제 요소로 추가(js)' 추가
+  li.innerText = 'green 클래스를 갖는 요소의 이전 형제 요소로 추가(js)';
+  // 4. green 클래스를 갖는 요소의 "바로 이전 형제 요소"로 li 요소 추가
+  green.before(li);
+  // 힌트: https://developer.mozilla.org/en-US/docs/Web/API/Element/before
+}
+
+function beforeJquery() {
+  $('.green').before('<li>jquery로 before 완!</li>');
+}
+
+// after()
+function afterJS() {
+  // 1. green 클래스를 갖는 요소 선택하고
+  const green = document.querySelector('.green');
+  // 2. li 태그 요소를 생성한 후
+  const li = document.createElement('li');
+  // 3. li 태그의 텍스트로 'green 클래스를 갖는 요소의 다음 형제 요소로 추가(js)' 추가
+  li.innerText = 'green 클래스를 갖는 요소의 다음 형제 요소로 추가(js)';
+  // 4. green 클래스를 갖는 요소의 "바로 다음 형제 요소"로 li 요소 추가
+  green.after(li);
+  // 힌트: https://developer.mozilla.org/en-US/docs/Web/API/Element/after
+}
+
+function afterJquery() {
+  $('.green').after('<li>jquery로 after 완!</li>');
+}
