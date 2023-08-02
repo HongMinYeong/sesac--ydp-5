@@ -27,7 +27,6 @@ pooh.setAttribute('src', './img/wawa.png');
 
 console.log('=======속성 얻기 (가져오기)=======');
 //속성 얻기(가져오기)
-//getAttribute(속성명) -> 속성 값 "얻기"
 console.log(document.getElementById('pooh').getAttribute('src'));
 
 //참고 ! 속성 접근(.) 연산자로도 가능
