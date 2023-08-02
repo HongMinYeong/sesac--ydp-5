@@ -35,13 +35,17 @@
   </head>
   <body>
     <h1>클래스 바꾸기</h1>
-    <div class="box bg-red" onclick="changeColor()"></div>
+    <div class="box bg-red"></div>
 
     <script>
+      // TODO: 조건을 만족하는 jquery 코드 작성
+      // .bg-red 클래스 있다면, .bg-red 제거, .bg-orange 추가
+      // .bg-orange 클래스 있다면, .bg-orange 제거, .bg-yellow 추가
+      // .bg-yellow 클래스 있다면, .bg-yellow 제거, .bg-red 추가
       const box = $('.box');
       function changeColor() {
-        // TODO: 조건을 만족하는 jquery 코드 작성
         if (box.hasClass('bg_red')) {
+          console.log('작동해유22');
           box.removeClass('bg_red');
           box.addClass('bg_orange');
         } else if (box.hasClass('bg_orange')) {
@@ -51,11 +55,12 @@
           box.removeClass('bg_yellow');
           box.addClass('bg_red');
         }
-        // .bg-red 클래스 있다면, .bg-red 제거, .bg-orange 추가
-        // .bg-orange 클래스 있다면, .bg-orange 제거, .bg-yellow 추가
-        // .bg-yellow 클래스 있다면, .bg-yellow 제거, .bg-red 추가
-        // box.click(changeColor);
       }
+
+      box.click(changeColor);
+      //   box.click(function () {
+      //     console.log('눌렷지롱');
+      //   });
     </script>
   </body>
 </html>
