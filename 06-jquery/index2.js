@@ -75,3 +75,38 @@ function changeHtmlJquery() {
   $('.p-html').html('<h3>javascript</h3>');
   //$('.p-html').text('<h3>javascript</h3>'); //태그 인식 안됨
 }
+
+// 요소 추가하기
+// append()
+function appendJS() {
+  // 1. color 클래스 갖는 요소 선택하고
+  const append_js = document.querySelector('.colors');
+  // 2. li 태그 요소를 생성한 후
+  const p = document.createElement('li');
+  // 3. li 태그의 텍스트로 '마지막 자식으로 추가된 js' 추가
+  p.innerText = '마지막 자식으로 추가된 js';
+  // 4. color 클래스를 갖는 요소에 "맨 마지막 자식"으로 li 요소 추가
+  append_js.append(p);
+  // 힌트: https://developer.mozilla.org/en-US/docs/Web/API/Element/append
+}
+
+function appendJquery() {
+  $('.colors').append('<li>jquery 로 append 완!</li>');
+}
+
+// prepend()
+function prependJS() {
+  // 1. color 클래스 갖는 요소 선택하고
+  const prepend_js = document.querySelector('.colors');
+  // 2. li 태그 요소를 생성한 후
+  const pp = document.createElement('li');
+  // 3. li 태그의 텍스트로 '첫 자식으로 추가된 js' 추가
+  pp.innerText = '첫 자식으로 추가된 js';
+  // 4. color 클래스를 갖는 요소에 "가장 첫 자식"으로 li 요소 추가
+  prepend_js.prepend(pp);
+  // 힌트: https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend
+}
+
+function prependJquery() {
+  $('.colors').prepend('<li>jquery 로 prepend 완!</li>');
+}
