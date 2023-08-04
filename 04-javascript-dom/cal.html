@@ -7,13 +7,26 @@
     <script defer src="./cal.js"></script>
   </head>
   <body>
-    <span>값 1 : </span>
-    <input type="text" id="원하는 아이디" />
-    <span>값 2 :</span>
-    <input type="text" id="원하는 아이디" />
-    <span>연산자 :</span>
-    <input type="text" id="원하는 아이디" />
-    <span>결과</span>
-    <input type="text" id="원하는 아이디" />
+    <div class="container">
+      <div class="value">
+        <span>값 1 :</span>
+        <input type="text" id="value1" />
+      </div>
+      <div class="value">
+        <span>값 2 :</span>
+        <input type="text" id="value2" />
+      </div>
+      <div class="value">
+        <span>연산자 :</span>
+        <input type="text" id="operator" />
+      </div>
+      <div class="value">
+        <span>결과 :</span>
+        <input type="text" id="result" />
+      </div>
+    </div>
+    <br />
+    <button class="cal">계산하기</button>
+    <button class="zero">초기화</button>
   </body>
 </html>
