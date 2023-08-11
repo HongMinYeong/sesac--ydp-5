@@ -25,3 +25,40 @@ let lists = ['apple', 'grapes'];
 console.log('item1 : ', item1);
 console.log('item2 : ', item2);
 console.log('item3 : ', item3);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//2. 객체 구조 분해 할당
+//- 변수를 선언하는 순서는 중요하지 않음
+//- 키 값과 변수명이 일치해야 함
+const obj = {
+  title: '엘리멘탈',
+  content: '잼',
+  num: 5,
+};
+//객체 구조 분해 쓰지 않았을 때
+console.log(obj.title, obj.content, obj.num);
+console.log(obj['title'], obj['content'], obj['num']);
+
+//객체 구조 분해 쓰고 싶다면
+//key가 존재하지 않을 때를 대비하여 ()=) 연산자를 이용하면 default 값을 할당
+// const { num, title, content, star } = obj;
+const { num, title, content, star = 1000 } = obj;
+console.log(
+  //title :  엘리멘탈 content :  잼 num :  5 star :  undefined
+  //   title :  엘리멘탈 content :  잼 num :  5 star :  1000
+  'title : ',
+  title,
+  'content : ',
+  content,
+  'num : ',
+  num,
+  'star : ',
+  star
+);
+
+const { n1, t1, c1 } = obj;
+console.log(n1, t1, c1); //undefined undefined undefined
+
+//클론(:) 을 이용하면 새 변수명으로 바꿔서 저장할 수 있다. !!
+const { title: t2, num: n2, content: c2 } = obj; //키값 바꾸기
+console.log(t2, c2, n2);
