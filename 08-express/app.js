@@ -2,8 +2,19 @@ const express = require('express');
 const app = express();
 const PORT = 8080;
 
+console.log(__dirname); ///Users/user/Documents/sesac-ydp-5/08-express
+console.log(__dirname + '/static'); ///Users/user/Documents/sesac-ydp-5/08-express/static
+
 app.set('view engine', 'ejs'); //express에서 사용할 템플릿 엔진 종류(ejs) 등록
 app.set('views', './views'); //템플릿 엔진 파일을 저장할 위치 등록
+
+app.use('/views', express.static(__dirname + '/views'));
+//http://localhost:8080/public/img/beach2.jpg
+app.use('/public', express.static(__dirname + '/static'));
+//static 미들웨어 등록
+//브라우저에서 url로 이 경로에 왓을때 이 파일을 읽어올 수 있음
+//http://localhost:8080/static/img/beach2.jpg
+// app.use('/static', express.static(__dirname + '/static'));
 
 //(임시) 데이터베이스에서 가져온 회원 정보(id,pw)
 const idFromDB = 'banana';
