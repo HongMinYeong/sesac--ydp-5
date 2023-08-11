@@ -63,7 +63,7 @@ console.log(n1, t1, c1); //undefined undefined undefined
 const { title: t2, num: n2, content: c2 } = obj; //키값 바꾸기
 console.log(t2, c2, n2);
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
 //과제
 function getInfo(lecture) {
   // TODO: 구조 분해 할당을 사용하여 값 추출
@@ -83,3 +83,60 @@ const lectureInfo = {
 
 const result = getInfo(lectureInfo);
 console.log(result); // SESAC x CODINGOn 강의는 WEB 개발을 공부합니다. 수업의 리더는 Sean 입니다.
+////////////////////////////////////////////////////////////////////////////////////////////////////
+console.clear();
+
+//spread 연산자
+//반복 가능한 객체에 대해서 단일 요소로 압축을 해제하는 역할(== 객체의 값을 펼친다!!!)
+//spread in array
+const a = [1, 2, 3];
+const b = [4, 5];
+const spread = [...a, ...b];
+console.log(spread); //[ 1, 2, 3, 4, 5 ]
+
+//spread in string
+const c = [...'Hello'];
+const d = 'HELLO'.split(''); //... vs split
+console.log(c); //[ 'H', 'e', 'l', 'l', 'o' ]
+console.log(d); //[ 'H', 'E', 'L', 'L', 'O' ]
+
+//spread in object
+const chip = {
+  base: 'chip',
+  company: 'lotte',
+};
+
+// const potatoChip = {
+//   base: 'chip',
+//   company: 'lotte',
+//   flavor: 'potato',
+// };
+const potatoChip = {
+  ...chip,
+  //   base: 'chip',
+  //   company: 'lotte',
+  flavor: 'potato',
+};
+
+// const sweetPotatoChip = {
+//   base: 'chip',
+//   company: 'lotte',
+//   flavor: 'sweet potato',
+// };
+const sweetPotatoChip = {
+  ...chip,
+  flavor: 'sweet potato',
+};
+
+console.log(chip);
+console.log(potatoChip);
+console.log(sweetPotatoChip);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//실습 spread 연산자 사용하기
+const word1 = 'abc';
+const word2 = 'xyz';
+
+const arr = [...word1, ...word2];
+console.log(arr);
+////////////////////////////////////////////////////////////////////////////////////////////////////
