@@ -3,15 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>메인페이지</title>
+    <%- include('./includes/head',{title : 'Home'})%>
   </head>
   <body>
+    <!-- <header>헤더</header> -->
+    <%- include('./includes/header')%>
     <h1>Hello ! Express!!</h1>
-    <p>안녕하세여~~~~~~~~~~~₩</p>
+    <!-- 객체 키값이용 -->
+    <%const userId = 'apple';%>
+    <p>안녕하세여~~~~~~~~~~<%= userId%>님! 환영합니다</p>
+    <!-- 퀴즈 -->
+    <p>당신의 비밀번호는 <%= userPw%>!!! 입니다. 비밀번호 다털렷쥬?</p>
     <% for (let i = 0; i<5; i++){ %>
     <div>i는 뭐냐면 ~~<%= i%>이야</div>
     <div>@@@@@@@@ 뚜...벅,,,뚜ㅜ....벅,,,뚜.,, @@@@@@@</div>
     <% } %>
+
+    <h2><%= userId%></h2>
+    <% for(let i = 0; i< btns.length; i++ ){ %>
+    <button type="button" class="btn btn-primary"><%= btns[i]%></button>
+    <% } %>
     <a href="/login">로그인</a>
+    <br />
+    <span>제 이름은 <%= me.name%>입니다.</span>
+    <span><%= me.msg%></span>
+
+    <br />
+    <% if(!isLogin){ %>
+    <h4>아직 로그인을 하지 않으셨군요!</h4>
+    <% } else { %>
+    <h4>로그인을 하셨군요!</h4>
+    <% } %>
   </body>
 </html>
