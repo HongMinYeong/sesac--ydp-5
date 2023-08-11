@@ -174,3 +174,130 @@ console.log(one1); //1
 console.log(two1); //2
 console.log(rest2); //[3,4,5,6,7,8] 이름이 꼭 rest 안해도됨
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+console.clear();
+//클래스
+// : 객체 생성 템플릿 => 객체를 만들기 위해 사용
+// 집이라는 현실 세계의 객체를 만들어보자!
+/* 
+속성: 
+    만들어진 연도(Number)
+    집의 이름(String)
+    창문 갯수(Number)
+메서드:
+    2023 - 만들어진 연도 콘솔창에 출력하는 "건물의 나이 메소드"
+    창문의 갯수 콘솔창에 출력하는 메소드
+*/
+class House {
+  //생성자 함수
+  // : 클래스를 이용해 객체를 생성할 때 마다 속성을 초기화
+  constructor(year, name, window) {
+    this.year = year;
+    this.name = name;
+    this.window = window;
+  }
+  //메서드 1 : 집의 나이를 출력
+  getAge() {
+    console.log(`${this.name}는 건축한지 ${2023 - this.year}년이 되었어요@@@`);
+  }
+
+  //메서드 2 : 집의 창문 갯수를 출력
+  getWindow() {
+    console.log(`${this.name}의 창문은 ${this.window}개 입니다.!@@@`);
+  }
+}
+
+//클래스(틀)를 이용해 객체를 찍어보자!(생산해보자! )
+const house1 = new House(1990, '롯데캐슬', 1);
+console.log('house1 >>', house1); //house1 >> House { year: 1990, name: '롯데캐슬', window: 1 }
+console.log(typeof house1); // object
+console.log(house1.year); //1990
+house1.getAge(); // 롯데캐슬는 건축한지 33년이 되었어요@@@
+house1.getWindow(); // 롯데캐슬의 창문은 1개 입니다.!@@@
+
+//house2 : 2007년에 지어진 " 자이 "이름이고, 창문은 10 개
+const house2 = new House(2008, '자이', 10);
+console.log('house2 >>', house2);
+house2.getAge(); // 자이는 건축한지 15년이 되었어요@@@
+
+//실습1
+class Shape {
+  constructor(row, col) {
+    this.row = row;
+    this.col = col;
+  }
+  getArea() {
+    //넓이 반환하는 메소드 (가로 * 세로)
+    return `넓이는 ${this.row * this.col}`;
+  }
+}
+
+let rec1 = new Shape(3, 4);
+console.log(rec1.getArea());
+//클래스 상속
+//부모 클래스 : House
+//자식 클래스 : Apartment
+class Apartment extends House {
+  constructor(year, name, window, floor, windowMaker) {
+    //부모 객체에서 상속 받아옴 = 상속한 부모 클래스의 생성자를 호출
+    super(year, name, window);
+    this.floor = floor;
+    this.windowMaker = windowMaker;
+  }
+  getAptInfo() {
+    return `${this.year}년에 지어진 ${this.name} 아파트의 총 층수는 ${this.floor}층이며, 창문의 갯수는 ${this.window}이다.`;
+  }
+  ////////////////////////////////////////////////////////////////////////////////
+  //오버라이딩(overriding)
+  //부모 클래스에 정의되어 있는 메서드 이름을 동일하게 쓰되, 내용은 다를 때
+  getWindow() {
+    return `${this.name} 아파트의 ${this.window} 개의 창문은 ${this.windowMaker} 회사에서 생산되었습니다.`;
+  }
+}
+const apt1 = new Apartment(2022, '래미안', 3, 20, 'KCC');
+console.log(apt1);
+//  Apartment {
+//     year: 2022,
+//     name: '래미안',
+//     window: 3,
+//     floor: 20,
+//     windowMaker: 'KCC'
+//   }
+console.log(apt1.getAptInfo()); // 2022년에 지어진 래미안 아파트의 총 층수는 20층이며, 창문의 갯수는 3이다.
+console.log(apt1.getWindow()); // 래미안 아파트의 3 개의 창문은 KCC 회사에서 생산되었습니다.
+
+////////////////////////////////////////////////////////////////////////////////
+//실습2
+//Rectangle(직사각형) 클래스 만들기
+class Rectangle extends Shape {
+  constructor(row, col) {
+    super(row, col);
+  }
+  getDiagonal() {
+    return Math.sqrt(this.row * this.row + this.col * this.col);
+  }
+}
+let red2 = new Rectangle(3, 4);
+console.log('대각선의 길이는 ', red2.getDiagonal(), '입니다.'); // 대각선의 길이는  5 입니다.
+class Triangle extends Shape {
+  constructor(row, col) {
+    super(row, col);
+  }
+  getArea() {
+    return (this.row * this.col) / 2;
+  }
+}
+let tri = new Triangle(3, 4);
+console.log('삼각형의 넓이는 ', tri.getArea(), '입니다.'); // 삼각형의 넓이는  6 입니다.
+class Circle extends Shape {
+  constructor(row, col, radius) {
+    super(row, col);
+    this.radius = radius;
+  }
+  getArea() {
+    console.log(typeof this.radius);
+    return this.radius ** 2;
+  }
+}
+let cir = new Circle(1, 1, 3);
+console.log('원의 넓이는 ', cir.getArea(), '파이 입니다.'); // 원의 넓이는  9 파이 입니다.
+////////////////////////////////////////////////////////////////////////////////
