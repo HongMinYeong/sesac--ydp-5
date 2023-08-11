@@ -140,3 +140,37 @@ const word2 = 'xyz';
 const arr = [...word1, ...word2];
 console.log(arr);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+//rest 파라미터
+//함수를 호출할 때 함수의 매개변수(parameter)를 spread operator로 작성한 형태를 Rest parameter라고 부릅니다.
+//1. 함수에서 rest를 사용할 때
+
+const values = [10, 20, 30, 40, 50, 60];
+
+function get(a, b, ...rest) {
+  //...rest 는 항상 마지막에 쓰기
+  //10, 20, 30 (10을 제외한 나머지를 묶어버림 )
+  console.log('a >> ', a); //a >>  10
+  console.log('b >> ', b); //b >>  20
+  console.log('rest >> ', rest); //  rest >>  [ 30, 40, 50, 60 ]
+}
+
+get(...values);
+
+//2. 객체에서 rest
+const icecream = {
+  company: 'lotte',
+  flavor: 'choco',
+  price: 1000,
+};
+
+const { flavor, ...rest } = icecream;
+console.log(flavor); //choco
+console.log(rest); //{ company: 'lotte', price: 1000 }
+
+//3. 배열에서 rest
+const number = [1, 2, 3, 4, 5, 6, 7, 8];
+const [one1, two1, ...rest2] = number;
+console.log(one1); //1
+console.log(two1); //2
+console.log(rest2); //[3,4,5,6,7,8] 이름이 꼭 rest 안해도됨
+////////////////////////////////////////////////////////////////////////////////////////////////////
