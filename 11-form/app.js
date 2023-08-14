@@ -33,16 +33,25 @@ app.get('/getForm', (req, res) => {
   });
 });
 
+app.get('/getInfo', (req, res) => {
+  console.log(req.query);
+  res.render('p', {
+    title: 'Get 요청 개인정보 확인하기',
+    Info: req.query,
+  });
+});
+
 //POST '/postForm' => 임의의 메시지 전송
 //post 방식은 클라이언트에서 보낸 데이터가 req.body에 저장
 app.post('/postForm', (req, res) => {
   console.log(req.body); //{ id: '아이디칸', pw: '비밀번호 칸 ' }
   //   res.send('post 요청 성공!');
   res.render('result', {
-    title: 'Get 요청 폼 결과 확인하기',
+    title: 'POST 요청 폼 결과 확인하기',
     userInfo: req.body,
   });
 });
+
 app.listen(PORT, () => {
   console.log(`${PORT} is open!`);
 });
