@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>callback hell</title>
+  </head>
+  <body>
+    <h1>콜백 지옥 예시</h1>
+    <script>
+      //1. 1초 뒤에 body 태그의 색상을 빨간색으로 변경
+      function a() {
+        const body = document.querySelector('body');
+        setTimeout(function () {
+          body.style.backgroundColor = 'red';
+        }, 1000);
+      }
+
+      a();
+      //2. 1초 뒤에 body 태그의 색상을 빨 -> 1초뒤 2주
+      function b() {
+        const body = document.querySelector('body');
+        body.style.backgroundColor = 'red';
+        setTimeout(function () {
+          const body = document.querySelector('body');
+          body.style.backgroundColor = 'orange';
+          setTimeout(function () {
+            const body = document.querySelector('body');
+            body.style.backgroundColor = 'yellow';
+          }, 1000);
+          setTimeout(function () {
+            const body = document.querySelector('body');
+            body.style.backgroundColor = 'green;';
+            setTimeout(function () {
+              const body = document.querySelector('body');
+              body.style.backgroundColor = 'blue';
+              setTimeout(function () {
+                const body = document.querySelector('body');
+                body.style.backgroundColor = 'navy';
+                setTimeout(function () {
+                  const body = document.querySelector('body');
+                  body.style.backgroundColor = 'violet';
+                }, 1000);
+              }, 1000);
+            }, 1000);
+          }, 1000);
+        }, 1000);
+      }
+      a();
+      b();
+    </script>
+  </body>
+</html>
