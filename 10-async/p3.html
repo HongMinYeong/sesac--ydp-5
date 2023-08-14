@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function change1(color) {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            document.body.style.backgroundColor = color;
+            resolve();
+          }, 1000);
+        });
+      }
+
+      change1('red')
+        .then(function () {
+          return change1('orange');
+        })
+        .then(function () {
+          return change1('yellow');
+        });
+    </script>
+  </body>
+</html>
