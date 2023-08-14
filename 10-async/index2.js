@@ -68,10 +68,10 @@ function nopay() {
   console.log('금액 부족 이잉');
 }
 
-let product;
-let price;
-goMart();
-pickDrink().then(pay).catch(nopay);
+// let product;
+// let price;
+// goMart();
+// pickDrink().then(pay).catch(nopay);
 // == pickDrink()
 //   .then(function () {
 //     pay();
@@ -79,3 +79,86 @@ pickDrink().then(pay).catch(nopay);
 //   .catch(function () {
 //     nopay();
 //   });
+
+//3.프로미스 체이닝(chaning)
+//  함수를 이용해(4+3) * 2 - 1 = 13 을 연산해보자!
+//sub(mul(add(4,3),2),1) : add -> mul -> sub
+
+//case1. 콜백함수로 처리한다면?
+// function add(n1, n2, callback) {
+//   setTimeout(function () {
+//     const result = n1 + n2;
+//     callback(result); //callback(7)
+//   }, 1000);
+// }
+// function mul(n, callback) {
+//   setTimeout(function () {
+//     const result = n * 2;
+//     callback(result); //callback(14)
+//   }, 700);
+// }
+
+// function sub(n, callback) {
+//   setTimeout(function () {
+//     const result = n - 1;
+//     callback(result); //callback(13)
+//   }, 500);
+// }
+
+// add(4, 3, function (x) {
+//   console.log('1 : ', x);
+//   mul(x, function (y) {
+//     console.log('2 : ', y);
+//     sub(y, function (z) {
+//       console.log('3 : ', z);
+//     });
+//   });
+// });
+
+//case2. promise 로 처리
+function add(n1, n2) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      const result = n1 + n2;
+      resolve(result);
+    }, 1000);
+  });
+}
+
+function mul(n) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      const result = n * 2;
+      resolve(result);
+    }, 700);
+  });
+}
+function sub(n) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      const result = n - 1;
+      // resolve(result);
+      reject(new Error('의도적으로 에러 일으켜봄 ! '));
+    }, 500);
+  });
+}
+
+//실행결과
+add(4, 3)
+  .then(function (result) {
+    //성공값을 then으로 받아옴
+    console.log('1 : ', result); //7
+    //메서드 체이닝에선 return을 해야함! -> return mul(7)
+    return mul(result);
+  })
+  .then(function (result) {
+    console.log('2 : ', result); //14
+    return sub(result); //return sub(14)
+  })
+  .then(function (result) {
+    console.log('3 : ', result);
+  })
+  .catch(function (err) {
+    console.log('실패!');
+    console.log(err);
+  });
