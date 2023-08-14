@@ -22,14 +22,26 @@ app.get('/', (req, res) => {
   res.render('index', { title: '@@폼 전송을 연습해보자@@' });
 });
 
+//GET'/getForm' => 임의의 메시지 전송
+//get 방식은 클라이언트에서 보낸 데이터가 req.query에 저장
 app.get('/getForm', (req, res) => {
-  console.log(req.query);
-  res.send('get 요청 성공!');
+  console.log(req.query); //{ id: '아이디칸', pw: '비밀번호 칸 ' }
+  //   res.send('get 요청 성공!');
+  res.render('result', {
+    title: 'Get 요청 폼 결과 확인하기',
+    userInfo: req.query,
+  });
 });
 
+//POST '/postForm' => 임의의 메시지 전송
+//post 방식은 클라이언트에서 보낸 데이터가 req.body에 저장
 app.post('/postForm', (req, res) => {
-  console.log(req.body);
-  res.send('post 요청 성공!');
+  console.log(req.body); //{ id: '아이디칸', pw: '비밀번호 칸 ' }
+  //   res.send('post 요청 성공!');
+  res.render('result', {
+    title: 'Get 요청 폼 결과 확인하기',
+    userInfo: req.body,
+  });
 });
 app.listen(PORT, () => {
   console.log(`${PORT} is open!`);
