@@ -1,103 +1,112 @@
 <!DOCTYPE html>
 <html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form & Input tag</title>
-</head>
+  </head>
 
-<body>
-    <h1>폼 태그 종류에 대해 알아보자 </h1>
+  <body>
+    <h1>폼 태그 종류에 대해 알아보자</h1>
     <!-- form tag : 사용자로부터 입력받는 요소 (input, select, textarea)들을 감싸는 태그
         form tag 의 attribute action, method 가 있는데, "서버"와 관련된 내용-> 추후소개
         화면에 드러나지 않는 추상적인 탵그(양식)-->
     <!-- <form action=""> -->
 
     <form>
-        <!-- 모든 input type에는 "name" attribute를 가질 수 있음("서버")-->
-        Text <input type="text">
-        Text2 <input type="text" disabled>
-        <!-- 수정할수 없도록 할때 disabled -->
+      <!-- 모든 input type에는 "name" attribute를 가질 수 있음("서버")-->
+      Text <input type="text" /> Text2 <input type="text" disabled />
+      <!-- 수정할수 없도록 할때 disabled -->
 
-        <br>
+      <br />
 
-        <!-- 웹 접근성에 적합   => 사용자가 편리하게 사용할 수 있다.-->
-        <label for="user-email">이메일</label>
-        <input type="email" id="user-email" placeholder="ex@gmail.com">
+      <!-- 웹 접근성에 적합   => 사용자가 편리하게 사용할 수 있다.-->
+      <label for="user-email">이메일</label>
+      <input type="email" id="user-email" placeholder="ex@gmail.com" />
 
-        <br>
-        <!-- textarea : 여러줄을 입력받는 요소 
+      <br />
+      <!-- textarea : 여러줄을 입력받는 요소 
             -cols,rows : 가로,세로 길이를 나타냄
             -마우스로 textarea 크기조절 가능  
         -->
-        <!-- placeholder 는 도움말입니다  -->
-        <textarea cols="30" rows="3" placeholder="문의사항을 입력해주세요 "></textarea>
+      <!-- placeholder 는 도움말입니다  -->
+      <textarea
+        cols="30"
+        rows="3"
+        placeholder="문의사항을 입력해주세요 "
+      ></textarea>
 
-        <br>
-        <input type="color">
-        <input type="range">
-        <!-- 범위를 나타내는 input -->
-        <input type="file">
-        <input type="number">
-        <!-- 숫자만 입력가능 -->
-        <input type="date">
-        <input type="datetime-local">
-        <!-- 시간까지 선택가능  -->
-        <br>
-        <hs>당신의 취미는?</hs>
-        <input type="checkbox" name="interest" value="badminton">배드민턴
-        <input type="checkbox" name="interest" value="basketball"> 농구
-        <input type="checkbox" name="interest" value="movie">영화보기
-        <input type="checkbox" name="interest" value="lay_down">누워있기
-        <!-- 체크박스에서 name과 value 쓰는 이유클라이언트 -> 브라우저 
+      <br />
+      <input type="color" />
+      <input type="range" />
+      <!-- 범위를 나타내는 input -->
+      <input type="file" />
+      <input type="number" />
+      <!-- 숫자만 입력가능 -->
+      <input type="date" />
+      <input type="datetime-local" />
+      <!-- 시간까지 선택가능  -->
+      <br />
+      <hs>당신의 취미는?</hs>
+      <input type="checkbox" name="interest" value="badminton" />배드민턴
+      <input type="checkbox" name="interest" value="basketball" /> 농구
+      <input type="checkbox" name="interest" value="movie" />영화보기
+      <input type="checkbox" name="interest" value="lay_down" />누워있기
+      <!-- 체크박스에서 name과 value 쓰는 이유클라이언트 -> 브라우저 
             클라이언트로 백에서 넘기면 얘네가 같은 카테고리에 있는 체크박스구나 인식 바람직하군..  -->
-        <br>
-        <h5>당신의 성별은?</h5>
-        <input type="radio" name="gender" value="f" id="genderF" checked><label for="genderF">여자</label>
-        <input type="radio" name="gender" value="m" id="genderM"><label for="genderM">남자</label>
-        <!-- radio에서 name으로 카테고리 설정 그래야 카테고리안에 하나만 선택하기 때문에  -->
-        <br>
-        <!-- 단순한 버튼  -->
-        <input type="button" value="바보면눌러">
-        <button type="button">천재면눌러</button>
-        <!-- 위 두 버튼 기능은 똑같당 -->
+      <br />
+      <h5>당신의 성별은?</h5>
+      <input type="radio" name="gender" value="f" id="genderF" checked /><label
+        for="genderF"
+        >여자</label
+      >
+      <input type="radio" name="gender" value="m" id="genderM" /><label
+        for="genderM"
+        >남자</label
+      >
+      <!-- radio에서 name으로 카테고리 설정 그래야 카테고리안에 하나만 선택하기 때문에  -->
+      <br />
+      <!-- button type
+            -button: 클릭 가능한 버튼 
+                -폼 태그 바깥에 존재할 때 기본 값
+            -submit: 폼을 제출하는 버튼 
+                -폼 태그 안에 있을 때 기본 값
+         -->
+      <!-- 단순한 버튼  -->
+      <input type="button" value="버튼1" />
+      <button type="button">버튼2</button>
+      <!-- 위 두 버튼 기능은 똑같당 -->
 
-        <br>
-        <!-- 폼을 "제출"버튼 -->
-        <input type="submit" value="제출1">
-        <button type="submit">제출2</button>
-        <br>
-        <!-- 드롭박스 -->
-        <!-- optgroup은 그룹화  -->
-        <select name="flower">
-            <optgroup label="red flower">
-                <option value="a">장미</option>
-                <option value="b">무궁화</option>
-                <option value="c" selected>동백꽃</option>
-                <!-- 동백꽃을 시작으로 할려면 selected넣으셈  -->
-            </optgroup>
-            <optgroup label="white flower">
-                <option value="a">장미</option>
-                <option value="b">무궁화</option>
-                <option value="c" selected>동백꽃</option>
-                <!-- 동백꽃을 시작으로 할려면 selected넣으셈  -->
-            </optgroup>
-        </select>
+      <br />
+      <!-- 폼을 "제출"버튼 -->
+      <input type="submit" value="제출1" />
+      <button type="submit">제출2</button>
+      <br />
+      <!-- 드롭박스 -->
+      <!-- optgroup은 그룹화  -->
+      <select name="flower">
+        <optgroup label="red flower">
+          <option value="a">장미</option>
+          <option value="b">무궁화</option>
+          <option value="c" selected>동백꽃</option>
+          <!-- 동백꽃을 시작으로 할려면 selected넣으셈  -->
+        </optgroup>
+        <optgroup label="white flower">
+          <option value="a">장미</option>
+          <option value="b">무궁화</option>
+          <option value="c" selected>동백꽃</option>
+          <!-- 동백꽃을 시작으로 할려면 selected넣으셈  -->
+        </optgroup>
+      </select>
 
-
-
-        <!-- <br>
+      <!-- <br>
         <br>
         <input type="text">
         <input type="button" value="버튼"> -->
-
     </form>
-
-
-
-</body>
-
+    <!-- form 바깥에 button은 type이 submit이 아니라 button -->
+    <button>나의 type은 걍 버튼</button>
+  </body>
 </html>
 
 <!-- 
