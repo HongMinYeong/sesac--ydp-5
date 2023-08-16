@@ -33,6 +33,7 @@ app.get('/getForm', (req, res) => {
   });
 });
 
+//과제
 app.get('/getInfo', (req, res) => {
   console.log(req.query);
   res.render('p', {
