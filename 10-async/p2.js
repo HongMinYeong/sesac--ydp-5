@@ -10,9 +10,8 @@ function call(name) {
 function back(n) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
-      const space = n;
-      console.log(space);
-      resolve(space);
+      console.log(n);
+      resolve(n);
     }, 1000);
   });
 }
@@ -20,8 +19,7 @@ function back(n) {
 function hell(n) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
-      const space2 = n;
-      resolve(space2);
+      resolve(n);
     }, 1000);
   });
 }

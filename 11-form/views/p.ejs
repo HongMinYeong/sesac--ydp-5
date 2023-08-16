@@ -9,6 +9,9 @@
         color: blue;
         font-weight: 700;
       }
+      .style{
+        background-color:Info.color;
+      }
     </style>
   </head>
   <body>
@@ -20,8 +23,16 @@
         ><%= Info.year%>년<%= Info.month%>월 <%= Info.day%>에 태어나셨군요</span
       >
     </div>
-    <div>관심사는 <span><%= Info.hob%></span> 이시군요!</div>
-    <div>좋아하는 색상은 <span><%= Info.color%></span> 이시군요!</div>
-    <div>좋아하는 숫자는 <span><%= Info.num%></span> 이시군요!</div>
+    <% if(Info.hob===undefined){ %>
+    <div>관심사는 없으시군요!</div>
+    <% }else{%>
+      <div>관심사는 <span><%= Info.hob%></span> 이시군요!<%}%>
+       <% if(Info.num===''){ %>
+    <div>좋아하는 숫자는 없으시군요</div>
+    <% } else{%>
+      <div>좋아하는 숫자는 <span><%= Info.num%></span> 이시군요!
+    <%}%>
+    좋아하는 색은 <div style=" width: 100px; height: 100px; background-color: <%= Info.color %>"></div>이시군요!
+
   </body>
 </html>
