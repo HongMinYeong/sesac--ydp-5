@@ -42,6 +42,11 @@
 
       <button type="button" onClick="axiosGet();">Axios Get 제출</button>
       <button type="button" onClick="axiosPost();">Axios Post 제출</button>
+      <br />
+      <br />
+
+      <button type="button" onClick="fetchGet();">Fetch Get 제출</button>
+      <button type="button" onClick="fetchPost();">Fetch Post 제출</button>
     </form>
 
     <!-- 동적 폼 전송 결과를 보여줄 곳  -->
@@ -191,6 +196,61 @@
         } catch (error) {
           console.log('error당 ', error);
         }
+      }
+      //fetch(url,options)
+      function fetchGet() {
+        console.log('fetchGet 함수 호출');
+
+        const form = document.forms['register'];
+        fetch(
+          `/fetch?name=${form.name.value}&gender=${form.gender.value}`
+          //fetch는 default로 get 방식으로 작동 options를 생략 가능~
+        )
+          .then(function (response) {
+            return response.json(); //JSON 응답을 네이티브 JavaScript 객체로 파싱
+            //JSON 형태로 응답 데이터를 전달받음. 응답(response) 객체는 json()메서드를 제공
+            //응답(response) 객체로부터 JSON포맷의 응답 전문을 자바스크립트 객체(js obj)로 변환
+          })
+          .then(function (data) {
+            console.log(data); //리턴값이 data로 들어오게 됨
+            //data 변수: 직전 then 메서드의 리턴값 : response.json()
+            resultBox.textContent = `GET / fetch 요청 완료!! ${data.name}님은 ${data.gender}이시죠?ㅎㅎ`;
+            resultBox.style.color = 'limegreen';
+          });
+      }
+
+      function fetchPost() {
+        console.log('fetchPost 함수 호출');
+
+        const form = document.forms['register'];
+        const data = {
+          name: form.name.value,
+          gender: form.gender.value,
+        }; //서버에 넘겨줄 데이터
+        //fetch를 이용해 post 요청을 날릴 때에는 option 객체가 반드시 필요함!
+        //1. method 옵션 post 지정
+        //2. headers 옵션 JSON 포맷 사용 선언
+        //3. body 키 서버로 보낼 데이터 선언
+        fetch('/fetch', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data), //js obj -> json // 데이터를 JSON 형식으로 !!
+        })
+          .then(function (response) {
+            console.log(response);
+            return response.json(); // JSON 응답을 네이티브 JavaScript 객체로 파싱
+          })
+          //   .then(function (data) {
+          //     console.log(data);
+          //     resultBox.textContent = `POST / fetch 요청 완료!! ${data.name}님은 ${data.gender}이시죠?ㅎㅎ`;
+          //     resultBox.style.color = 'hotpink';
+          //   }
+          .then((response) => {
+            console.log(data);
+            resultBox.textContent = `POST / fetch 요청 완료!! ${data.name}님은 ${data.gender}이시죠?ㅎㅎ`;
+          });
       }
     </script>
   </body>
