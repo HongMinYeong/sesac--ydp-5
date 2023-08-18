@@ -10,6 +10,7 @@
       integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
       span {
         color: blue;
@@ -36,6 +37,11 @@
 
       <button type="button" onClick="ajaxGet();">Ajax Get 제출</button>
       <button type="button" onClick="ajaxPost();">Ajax Post 제출</button>
+      <br />
+      <br />
+
+      <button type="button" onClick="axiosGet();">Axios Get 제출</button>
+      <button type="button" onClick="axiosPost();">Axios Post 제출</button>
     </form>
 
     <!-- 동적 폼 전송 결과를 보여줄 곳  -->
@@ -98,6 +104,93 @@
             resultBox.textContent = `POST/ ajax 요청 완료!! ${data.name}님은 ${data.gender}이시죠? ㅎㅎ`;
           },
         });
+      }
+      async function axiosGet() {
+        console.log('axiosGet 함수 호출!');
+        // form 선택
+        const form = document.forms['register'];
+        const data = {
+          name: form.name.value,
+          gender: form.gender.value,
+        };
+        //axios 요청의 결과는 Promise 객체
+        //-> then,catch 메서드로 체이닝이 가능 !
+        //-> async,await 도 사용할 수 있음 !
+        // axios({
+        //   method: 'GET', //폼의 요청 방식(= form method 속성과 유사)
+        //   url: '/axios', //요청 경로 (= form action 속성 )
+        //   //params 키를 사용하지 않고 query string 을 직접 정의해서 요청을 보낼 수 도 있음 (위와 동일한 코드)
+        //   //   url: `/axios?name${form.name.value}&gender=${form.gender.value}`,
+        //   //   url: '/axioss', //catch 구문 실행해보기
+        //   params: data, // 서버로 보낼 데이터 -> query string 을 의미
+        // });
+        //   .then(function (response) {
+        //     console.log(response); //서버의 응답 결과가 들어있는 객체
+        //     console.log(response.data); //서버의 응답 데이터를 확인
+        //     //ajax는 req.query 가 바로 데이터
+        //     //axios는 다른 부가 정보를 같이 추가한다음에 response.data == req.query
+        //     //퀴즈1. 객체 구조분해
+        //     const { name, gender } = response.data;
+        //     resultBox.textContent = `GET/axios 요청 완료 !! ${name}님은 ${gender}이시죠?ㅎㅎ`;
+        //     resultBox.style.color = 'green';
+        //   })
+        //   .catch(function (error) {
+        //     console.log('Error!', error);
+        //   });
+        //퀴즈2.axios 요청 처리 async/await로 변경!
+        try {
+          const response = await axios({
+            method: 'GET',
+            url: '/axios',
+            params: data,
+          });
+          const { name, gender } = response.data;
+          resultBox.textContent = `async 요청 완료 !! ${name}님은 ${gender}이시죠?ㅎㅎ`;
+          resultBox.style.color = 'blue';
+        } catch (error) {
+          console.log('에러임', error);
+        }
+      }
+
+      //   function axiosPost() {
+      //     console.log('axiosPost 함수 호출!');
+      //     const form = document.forms['register'];
+      //     const data = {
+      //       name: form.name.value,
+      //       gender: form.gender.value,
+      //     };
+
+      //     axios({
+      //       method: 'post',
+      //       url: '/axios',
+      //       data: data, //post 요청 => data에!!
+      //     }).then(function (response) {
+      //       console.log(response);
+      //       console.log(response.data);
+      //       resultBox.textContent = `POST/axios 요청 완료 !! ${response.data.name}님은 ${response.data.gender}이시죠?ㅎㅎ`;
+      //       resultBox.style.color = 'gold';
+      //     });
+      //   }
+      //async-await로 post방식 변경
+      async function axiosPost() {
+        console.log('axiosPost 함수 호출!');
+        const form = document.forms['register'];
+        const data = {
+          name: form.name.value,
+          gender: form.gender.value,
+        };
+        try {
+          const dataa = await axios({
+            method: 'post',
+            url: '/axios',
+            data: data, //post 요청 => data에!!
+          });
+          const { name, gender } = dataa.data;
+          resultBox.textContent = `async/POST/axios 요청 완료 !! ${name}님은 ${gender}이시죠?ㅎㅎ`;
+          resultBox.style.color = 'gold';
+        } catch (error) {
+          console.log('error당 ', error);
+        }
       }
     </script>
   </body>
