@@ -18,10 +18,10 @@ app.use(express.urlencoded({ extended: true })); //post 요청으로 들어오�
 app.use(express.json()); //데이터를 주고 받을 때 json 형식으로 받겠다를 의미
 
 app.get('/', function (req, res) {
-  //   res.render('dynamic');
-  res.render('practice', {
-    Info: req.query,
-  });
+  res.render('dynamic');
+  // res.render('practice', {
+  //   Info: req.query,
+  // });
 });
 
 //////////////////////////////////////////////////////

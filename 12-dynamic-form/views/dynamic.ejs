@@ -19,14 +19,16 @@
     <!-- 이름, 성별(radio)을 정보를 입력받는 폼  -->
     <form name="register">
       <label for="name">이름</label>
-      <input type="text" id="name" name="name" value="민영" />
+      <!-- <input type="text" id="name" name="name" value="민영" /> -->
+      <input type="text" id="name" name="name" required />
       <br />
 
       성별 :
-      <input type="radio" name="gender" value="m" id="male" />
+      <input type="radio" name="gender" value="m" id="male" required />
       <label for="male">남</label>
 
-      <input type="radio" name="gender" value="f" id="female" checked />
+      <!-- <input type="radio" name="gender" value="f" id="female" checked /> -->
+      <input type="radio" name="gender" value="f" id="female" />
       <label for="female">여</label>
       <br />
       <br />
@@ -36,7 +38,9 @@
       <br />
       <br />
 
-      <button type="button" onClick="axiosGet();">Axios Get 제출</button>
+      <button type="button" onClick="axiosGet();">
+        Axios Get 제출 (+ form validation)
+      </button>
       <button type="button" onClick="axiosPost();">Axios Post 제출</button>
       <br />
       <br />
@@ -59,6 +63,9 @@
     <!-- 동적 폼 전송 결과를 보여줄 곳  -->
     <!-- 퀴즈 div.result 선택해서 서버로 받은 data 값 활용해 내용 브라우저 화면에 출력 -->
     <div class="result"></div>
+    <!-- 폼 유효성 검사  -->
+    <div class="result1"></div>
+    <div class="result2"></div>
     <script>
       const img = document.querySelector('img');
       async function changeImg() {
@@ -72,6 +79,8 @@
       }
       //frontend javascript
       const resultBox = document.querySelector('div.result');
+      const result1Box = document.querySelector('div.result1');
+      const result2Box = document.querySelector('div.result2');
 
       function ajaxGet() {
         console.log('ajaxGet 함수 호출!');
@@ -135,6 +144,11 @@
           name: form.name.value,
           gender: form.gender.value,
         };
+
+        console.log(form.name.checkValidity());
+        // 같은 name으로 묶인 radio btn은 하나만 선택되더라도 true를 반환
+        console.log('gender 첫번째 요소 ->', form.gender[0].checkValidity());
+        console.log('gender 두번째 요소 ->', form.gender[1].checkValidity());
         //axios 요청의 결과는 Promise 객체
         //-> then,catch 메서드로 체이닝이 가능 !
         //-> async,await 도 사용할 수 있음 !
@@ -161,14 +175,26 @@
         //   });
         //퀴즈2.axios 요청 처리 async/await로 변경!
         try {
+          //폼 유효성 검사
+          // name input 에 입력된 값이 없다면, '이름을 입력해주세요!'
+          //gender radio btn을 선택하지 않았다면, '성별을 선택해주세요!'
+          //둘 다 입력이 잘 되었다면, axios 로 back에 요청 날리기
           const response = await axios({
             method: 'GET',
             url: '/axios',
             params: data,
           });
           const { name, gender } = response.data;
-          resultBox.textContent = `async 요청 완료 !! ${name}님은 ${gender}이시죠?ㅎㅎ`;
-          resultBox.style.color = 'blue';
+          if (!form.name.checkValidity()) {
+            result1Box.textContent = '이름을 입력해주세요!';
+          }
+          if (!form.gender[0].checkValidity()) {
+            result2Box.textContent = '성별을 선택해주세요!';
+          }
+          if (form.name.checkValidity() && form.gender[0].checkValidity()) {
+            resultBox.textContent = `async 요청 완료 !! ${name}님은 ${gender}이시죠?ㅎㅎ`;
+            resultBox.style.color = 'blue';
+          }
         } catch (error) {
           console.log('에러임', error);
         }
