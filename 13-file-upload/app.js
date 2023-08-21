@@ -30,6 +30,8 @@ const uploadDetail = multer({
 
 app.set('view engine', 'ejs');
 app.use('/views', express.static(__dirname + '/views'));
+// static 미들웨어 등록
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -84,24 +86,11 @@ app.post(
   }
 );
 
-// function fileUpload() {
-//   const formData = new FormData();
-//   const file = document.getElementById('dynamic-file');
-//   formData.append('dynamic-userfile', file.files[0]);
-//   axios({
-//     method: 'POST',
-//     url: '/dynamicFile',
-//     data: FormData,
-//     headers: {
-//       'Content-Type': 'multipart/form-data',
-//     },
-//   }).then(function (response) {
-//     console.log(response);
-//     console.log(response.data);
-//     console.log(response.data.path);
-//     document.querySelector('img').src = response.data.path;
-//   });
-// }
+// 요청을 날리면 서버에서 응답 여기서
+app.post('/dynamicFile', uploadDetail.single('dynamicUserfile'), (req, res) => {
+  console.log(req.file);
+  res.send(req.file);
+});
 
 app.listen(PORT, function () {
   console.log(`Port ${PORT} is opening!`);
