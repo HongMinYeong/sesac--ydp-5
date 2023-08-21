@@ -60,6 +60,48 @@ app.post('/upload', uploadDetail.single('userfile'), (req, res) => {
   //     size: 13812 //파일크기
   //   }
 });
+// 2. array() : 여러 파일을 한번에 업로드
+// uploadDetail.array('userfiles') : 클라이언트 요청이 들어오면
+//multer 설정 (uploadDetail 변수)에 따라 파일을 업로드한 후, req.files 객체 생성
+app.post('/upload/array', uploadDetail.array('userfiles'), (req, res) => {
+  console.log(req.files); //[{파일1_정보},{파일2_정보},...]
+  console.log('-------------');
+  console.log(req.body);
+  res.send('하나의 input에 여러 파일 업로드 완료!');
+});
+
+//3. fields() : 여러 파일을 각각 input에 업로드
+//req.files에서 파일 정보를 확인
+//fields() 의 매개변수로 input 태그의 name을 각각 넣기
+app.post(
+  '/upload/fields',
+  uploadDetail.fields([{ name: 'userfile1' }, { name: 'userfile2' }]),
+  (req, res) => {
+    console.log(req.files);
+    console.log('-------------');
+    console.log(req.body);
+    res.send('하나의 input에 여러 파일 업로드 완료!');
+  }
+);
+
+// function fileUpload() {
+//   const formData = new FormData();
+//   const file = document.getElementById('dynamic-file');
+//   formData.append('dynamic-userfile', file.files[0]);
+//   axios({
+//     method: 'POST',
+//     url: '/dynamicFile',
+//     data: FormData,
+//     headers: {
+//       'Content-Type': 'multipart/form-data',
+//     },
+//   }).then(function (response) {
+//     console.log(response);
+//     console.log(response.data);
+//     console.log(response.data.path);
+//     document.querySelector('img').src = response.data.path;
+//   });
+// }
 
 app.listen(PORT, function () {
   console.log(`Port ${PORT} is opening!`);
