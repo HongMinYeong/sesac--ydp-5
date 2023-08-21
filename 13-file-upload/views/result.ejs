@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습 결과</title>
+    <style>
+      body {
+        background-color: #1d1d1d;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .card {
+        text-align: center;
+        background-color: #fffff8;
+        border-radius: 20px;
+        width: 300px;
+        padding: 30px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <img src="<%= srcc%>" width="200" />
+      <h3><%= userInfo.userid%>님 환영합니다!</h3>
+      <ul>
+        <li>비밀번호 : <%= userInfo.password%></li>
+        <li>이름 :<%= userInfo.username%></li>
+        <li>나이 :<%= userInfo.age%></li>
+      </ul>
+    </div>
+  </body>
+</html>
