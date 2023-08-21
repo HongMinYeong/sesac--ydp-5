@@ -179,19 +179,17 @@
           // name input 에 입력된 값이 없다면, '이름을 입력해주세요!'
           //gender radio btn을 선택하지 않았다면, '성별을 선택해주세요!'
           //둘 다 입력이 잘 되었다면, axios 로 back에 요청 날리기
-          const response = await axios({
-            method: 'GET',
-            url: '/axios',
-            params: data,
-          });
           const { name, gender } = response.data;
           if (!form.name.checkValidity()) {
             result1Box.textContent = '이름을 입력해주세요!';
-          }
-          if (!form.gender[0].checkValidity()) {
+          } else if (!form.gender[0].checkValidity()) {
             result2Box.textContent = '성별을 선택해주세요!';
-          }
-          if (form.name.checkValidity() && form.gender[0].checkValidity()) {
+          } else {
+            const response = await axios({
+              method: 'GET',
+              url: '/axios',
+              params: data,
+            });
             resultBox.textContent = `async 요청 완료 !! ${name}님은 ${gender}이시죠?ㅎㅎ`;
             resultBox.style.color = 'blue';
           }
