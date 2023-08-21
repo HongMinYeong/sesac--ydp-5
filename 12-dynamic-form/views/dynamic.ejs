@@ -179,7 +179,7 @@
           // name input 에 입력된 값이 없다면, '이름을 입력해주세요!'
           //gender radio btn을 선택하지 않았다면, '성별을 선택해주세요!'
           //둘 다 입력이 잘 되었다면, axios 로 back에 요청 날리기
-          const { name, gender } = response.data;
+
           if (!form.name.checkValidity()) {
             result1Box.textContent = '이름을 입력해주세요!';
           } else if (!form.gender[0].checkValidity()) {
