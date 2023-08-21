@@ -14,5 +14,12 @@
       <input type="text" name="title" /><br /><br />
       <button type="submit">업로드</button>
     </form>
+    <h2>Multi file upload (ver1)</h2>
+    <p>하나의 input에 여러 개 파일 업로드하기</p>
+    <form action="/upload/array" method="POST" enctype="multipart/form-data">
+      <input type="file" name="userfiles" multiple /> <br />
+      <input type="text" name="title" /><br /><br />
+      <button type="submit">업로드</button>
+    </form>
   </body>
 </html>
