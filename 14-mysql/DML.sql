@@ -28,6 +28,15 @@ CREATE TABLE ORDERS (
 	FOREIGN KEY (CUSTID) REFERENCES CUSTOMER(CUSTID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+-- 테이블 삭제 순서!
+-- customer table, orders table이 customer.custid 를 기준으로 "관계" 맺음
+-- customer table 존재하는 회원만 orders 테이블에 데이터를 추가할 수 있음
+-- 만약에 orders 테이블이 있는데, customer 테이블을 삭제 (drop) 하면?
+-- orders 테이블은 어떤 고객의 생일 정보를 알고 싶어도 customer 테이블 자체가 날라갔기 때문에 알 수 없음. 
+-- pk-fk 연결된 테이블은 외래키가 설정된 테이블 (참조 테이블) 먼저 삭제
+-- (1) orders 테이블 삭제 -> (2) customer 테이블 삭제
+
+
 -- INSERT 추가 
 INSERT INTO CUSTOMER (CUSTID,CUSTNAME,ADDR,PHONE,BIRTH) 
 			VALUES ('LUCKY','강해원','미국 뉴욕','01022223333','2002-03-05');
@@ -73,3 +82,125 @@ SELECT * FROM ORDERS;
 DROP TABLE CUSTOMER;
 DROP TABLE ORDERS;
 
+-- SET FOREIGN_KEY_CHECKS = 1;
+
+TRUNCATE TABLE CUSTOMER;
+TRUNCATE TABLE ORDERS;
+
+
+
+-- SELECT 실습 -------
+
+INSERT INTO customer VALUES('bunny', '강해린', '대한민국 서울', '01012341234', '2000-02-23');
+INSERT INTO customer VALUES('hello', '이지민', '대한민국 포항', '01022221234', '1999-08-08');
+INSERT INTO customer VALUES('kiwi', '최지수', '미국 뉴욕', '01050005000', '1990-12-25');
+INSERT INTO customer VALUES('imminji01', '강민지', '영국 런던', '01060001000', '1995-01-11');
+INSERT INTO customer VALUES('lalala', '홍수지', '미국 로스앤젤레스', '01010109090', '2007-05-16');
+INSERT INTO customer VALUES('jjjeee', '홍은정', '대한민국 서울', '01099991111', '2004-08-17');
+INSERT INTO customer VALUES('wow123', '이민혁', '일본 삿포로', '01011223344', '1994-05-31');
+INSERT INTO customer VALUES('minjipark', '박민지', '프랑스 파리', '01088776655', '1998-04-08');
+INSERT INTO customer VALUES('jy9987', '강지연', '일본 삿포로', '01012312323', '1996-09-01');
+
+
+
+
+INSERT INTO orders VALUES(NULL, 'jy9987', '프링글스', 3500, 2);
+INSERT INTO orders VALUES(NULL, 'kiwi', '새우깡', 1200, 1);
+INSERT INTO orders VALUES(NULL, 'hello', '홈런볼', 4200, 2);
+INSERT INTO orders VALUES(NULL, 'minjipark', '맛동산', 2400, 1);
+INSERT INTO orders VALUES(NULL, 'bunny', '오감자', 1500, 4);
+INSERT INTO orders VALUES(NULL, 'jjjeee', '양파링', 2000, 1);
+INSERT INTO orders VALUES(NULL, 'hello', '자갈치', 1300, 2);
+INSERT INTO orders VALUES(NULL, 'jjjeee', '감자깡', 1200, 4);
+INSERT INTO orders VALUES(NULL, 'bunny', '죠리퐁', 1500, 3);
+INSERT INTO orders VALUES(NULL, 'kiwi', '꼬깔콘', 1700, 2);
+INSERT INTO orders VALUES(NULL, 'hello', '버터링', 4000, 2);
+INSERT INTO orders VALUES(NULL, 'minjipark', '칙촉', 4000, 1);
+INSERT INTO orders VALUES(NULL, 'wow123', '콘초', 1700, 3);
+INSERT INTO orders VALUES(NULL, 'imminji01', '꼬북칩', 2000, 2);
+INSERT INTO orders VALUES(NULL, 'bunny', '썬칩', 1800, 5);
+INSERT INTO orders VALUES(NULL, 'kiwi', '고구마깡', 1300, 3);
+INSERT INTO orders VALUES(NULL, 'jy9987', '오징어집', 1700, 5);
+INSERT INTO orders VALUES(NULL, 'jjjeee', '바나나킥', 2000, 4);
+INSERT INTO orders VALUES(NULL, 'imminji01', '초코파이', 5000, 2);
+
+-- 모든 고객의 아이디를 검색
+SELECT CUSTID FROM CUSTOMER;
+
+-- 모든 고객의 아이디, 생년월일 검색
+SELECT CUSTID, BIRTH FROM CUSTOMER;
+
+-- 모든 고객의 생년월일, 아이디 검색 (순서 있음))
+SELECT BIRTH, CUSTID FROM CUSTOMER;
+
+-- 모든 고객의 아이디, 이름, 주소,전화번호, 생년월일 검색
+SELECT CUSTID, CUSTNAME,ADDR,PHONE,BIRTH FROM CUSTOMER;
+
+-- * 와일드 카드 사용 
+SELECT * FROM CUSTOMER;
+
+위에랑 동일.
+
+-- 고객 테이블에 있는 모든 주소 검색
+SELECT ADDR FROM CUSTOMER;
+-- DISTINCT : 중복제거 
+SELECT DISTINCT ADDR  FROM CUSTOMER;
+
+-- < WHERE 조건 >
+-- 비교: =, <>, <, <=, >, >=
+-- 범위: BETWEEN
+-- 집합: IN, NOT IN
+-- 패턴: LIKE
+-- NULL: IS NULL, IS NOT NULL
+-- 복합조건: AND, OR, NOT
+
+-- 비교
+-- 고객 이름이 강해린인 고객의 생일을 검색
+SELECT BIRTH FROM CUSTOMER WHERE CUSTNAME = '강해린';
+-- 고객 이름이 강해린이 아닌 고객들의 생일 검색 
+SELECT BIRTH FROM CUSTOMER WHERE CUSTNAME != '강해린';
+-- 사전순으로 박민지보다 뒤에 위치한 고객의 모든 정보 검색
+SELECT * FROM CUSTOMER WHERE CUSTNAME>'박민지' ;
+-- 범위
+-- 1995년이상 2000년 이하 출생 고객 검색
+SELECT * FROM CUSTOMER WHERE BIRTH BETWEEN '1995-01-01' AND '2000-12-31' ;
+SELECT * FROM CUSTOMER WHERE BIRTH >= '1995-01-01' AND BIRTH <= '2000-12-31' ;
+
+
+-- 집합
+-- 주소가 서울 혹은 런던인 고객 검색
+SELECT * FROM CUSTOMER WHERE ADDR IN ('대한민국 서울','영국 런던' );
+SELECT * FROM CUSTOMER WHERE ADDR = '대한민국 서울' OR ADDR = '영국 런던';
+-- 주소가 서울 혹은 런던이 아닌 고객 검색
+SELECT * FROM CUSTOMER WHERE ADDR NOT IN ('대한민국 서울','영국 런던' );
+
+
+-- 패턴
+-- 주소가 '미국 로스앤젤레스'인 고객을 검색
+SELECT * FROM CUSTOMER WHERE ADDR LIKE '미국 로스앤젤레스';
+
+-- 주소에 '미국'이 포함되어 있는 고객 검색
+-- %: 0개 이상 문자열
+SELECT * FROM CUSTOMER WHERE ADDR LIKE '%미국%';
+
+-- 고객 이름 두번째 글자가 '지'인 고객 검색
+-- _:임의의 하나의 문자
+SELECT * FROM CUSTOMER WHERE CUSTNAME LIKE '_지%';
+-- 참고
+SELECT * FROM CUSTOMER WHERE CUSTNAME LIKE '_지'; -- 검색 결과 0 
+
+-- 고객 이름 세번째 글자가 '수'인 고객
+SELECT * FROM CUSTOMER WHERE CUSTNAME LIKE '__수%';
+-- 참고
+
+SELECT * FROM CUSTOMER WHERE CUSTNAME LIKE '%수'; -- 이름이 몇자든 마지막 글자가 수이면 다 선택
+
+
+
+-- 복합조건 (AND, OR, NOT)
+-- 주소지가 대한민국이고, 2000년생 이후 출생 고객 검색
+SELECT * FROM CUSTOMER WHERE ADDR LIKE '대한민국%' AND BIRTH >= '2000-01-01';
+-- 주소지가 미국이거나 영국인 고객 검색
+SELECT * FROM CUSTOMER WHERE ADDR LIKE '미국%' OR ADDR LIKE '영국%';
+-- 휴대폰 번호 마지막 자리가 4가 아닌 고객 검색
+SELECT * FROM CUSTOMER WHERE PHONE NOT LIKE '%_4'; -- 언더바가 들어가야 무조건 4로 끝남 
