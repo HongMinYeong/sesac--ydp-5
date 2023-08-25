@@ -1,3 +1,4 @@
+
 CREATE TABLE CUSTOMER (
 	CUSTID CHAR(10) PRIMARY KEY,
 	CUSTNAME VARCHAR(10) NOT NULL,
@@ -204,3 +205,6 @@ SELECT * FROM CUSTOMER WHERE ADDR LIKE '대한민국%' AND BIRTH >= '2000-01-01'
 SELECT * FROM CUSTOMER WHERE ADDR LIKE '미국%' OR ADDR LIKE '영국%';
 -- 휴대폰 번호 마지막 자리가 4가 아닌 고객 검색
 SELECT * FROM CUSTOMER WHERE PHONE NOT LIKE '%_4'; -- 언더바가 들어가야 무조건 4로 끝남 
+
+-- 고객별로 주문한 총 주문액 구하기
+select custid, sum(price * amoung) from orders group by custid;
