@@ -17,4 +17,31 @@
     <a href="/login">로그인 결과 확인</a>
     <!-- <div class="res2" style="color: red"></div> -->
   </body>
+  <script>
+    const result = document.querySelector('a');
+
+    async function clickLogin() {
+      const form = document.forms['login'];
+      const data = {
+        id: form.id.value,
+        pw: form.passwd.value,
+      };
+      console.log('axios post 진입');
+      try {
+        const res = await axios({
+          method: 'post',
+          url: '/post',
+          data: data,
+        });
+        const { id, pw } = res.data;
+        if (id === 'banana' && pw == '4321') {
+          result.innerHTML = `<a style="color: blue;">${id}님 로그인에 성공하셨습니다!</a>`;
+        } else {
+          result.innerHTML = `<a style="color: red;">${id}님 로그인에 실패하셨습니다!</a>`;
+        }
+      } catch (error) {
+        console.log('Error!', error);
+      }
+    }
+  </script>
 </html>

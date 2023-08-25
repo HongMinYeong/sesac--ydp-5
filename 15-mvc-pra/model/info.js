@@ -1,11 +1,6 @@
-//model!!
-//db에서 전체 댓글 목록을 받아왔다고 가정
+exports.post_join = function (data) {
+  console.log(data);
+  const { id, name, email, phoneNumber, password } = data;
+};
 
-exports.login_info = () => {
-  return [
-    {
-      id: 'banana',
-      pw: '4321',
-    },
-  ];
 };

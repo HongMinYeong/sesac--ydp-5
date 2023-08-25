@@ -1,24 +1,20 @@
 const express = require('express');
 const app = express();
-const PORT = 8000;
+const port = 8080;
+const bodyParser = require('body-parser');
 
 app.set('view engine', 'ejs');
-app.use('/views', express.static(__dirname + '/views'));
-app.use('/static', express.static(__dirname + '/static'));
+app.use(express.static('uploads'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.json());
 
-// const indexRouter = require('./routes');
-// app.use('/', indexRouter);
-app.get('/', (req, res) => {
-  res.render('index');
+const router = require('./routes');
+app.use('/', router);
+
+app.get('/', function (req, res) {
+  res.send('Index');
 });
 
-app.post('/axios', (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
-
-app.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log('Server Port: ', port);
 });
