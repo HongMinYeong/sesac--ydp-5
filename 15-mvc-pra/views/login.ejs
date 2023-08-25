@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>result</title>
+  </head>
+  <body>
+    <div class="res2"></div>
+  </body>
+  <script>
+    const resultBox2 = document.querySelector('div.res2');
+
+    async function clickLogin() {
+      const form = document.forms['login'];
+      const data = {
+        id: form.id.value,
+        pw: form.passwd.value,
+      };
+      console.log('axios post 진입');
+      try {
+        const res = await axios({
+          method: 'post',
+          url: '/post',
+          data: data,
+        });
+        const { id, pw } = res.data;
+        if (id === 'banana' && pw == '4321') {
+          resultBox2.innerHTML = `<div style="color: blue;">${id}님 로그인에 성공하셨습니다!</div>`;
+        } else {
+          resultBox2.innerHTML = `<div style="color: red;">${id}님 로그인에 실패하셨습니다!</div>`;
+        }
+      } catch (error) {
+        console.log('Error!', error);
+      }
+    }
+  </script>
+</html>
