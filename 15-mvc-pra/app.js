@@ -1,20 +1,15 @@
 const express = require('express');
 const app = express();
-const port = 8080;
-const bodyParser = require('body-parser');
+const PORT = 8000;
 
 app.set('view engine', 'ejs');
-app.use(express.static('uploads'));
+app.use('/views', express.static(__dirname + '/views'));
 app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json());
 
-const router = require('./routes');
-app.use('/', router);
+const userRouter = require('./routes');
+app.use('/', userRouter);
 
-app.get('/', function (req, res) {
-  res.send('Index');
-});
-
-app.listen(port, () => {
-  console.log('Server Port: ', port);
+app.listen(PORT, function () {
+  console.log(`http://localhost:${PORT}`);
 });
