@@ -1,5 +1,4 @@
 //front js
-console.log('dfddf');
 const tbody = document.querySelector('tbody');
 const buttonGroup = document.querySelector('#button-group');
 
@@ -16,6 +15,26 @@ function createVisitor() {
       comment: form.comment.value,
     },
   }).then((res) => {
-    console.log('post/visitor 요청에 대한 응답', res);
+    console.log('post/visitor 요청에 대한 응답', res.data);
+    const { id, name, comment } = res.data;
+    //:newVisitor 변수에 tr요소를 생성하고 ,tbody의 맨 마지막 요소로 추가
+    const newVisitor = `
+    <tr id="tr_${id}<">
+          <td>${id}</td>
+          <td>${name}</td>
+          <td>${comment}</td>
+          <td>
+            <button type="button">수정</button>
+          </td>
+          <td>
+            <button type="button">삭제</button>
+          </td>
+        </tr>
+    `;
+    //jquery
+    // $('tbody').append(newVisitor);
+
+    //js
+    tbody.insertAdjacentHTML('beforeend', newVisitor);
   });
 }
