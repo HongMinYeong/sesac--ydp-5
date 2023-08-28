@@ -27,7 +27,7 @@ function createVisitor() {
             <button type="button">수정</button>
           </td>
           <td>
-            <button type="button">삭제</button>
+            <button type="button" onclick="deleteVisitor(this,${id})">삭제</button>
           </td>
         </tr>
     `;
@@ -36,5 +36,29 @@ function createVisitor() {
 
     //js
     tbody.insertAdjacentHTML('beforeend', newVisitor);
+  });
+}
+
+function deleteVisitor(obj, id) {
+  console.log(obj, id); //>>  <button type="button" onclick="deleteVisitor(this,'16')">삭제</button>
+  if (!confirm(`정말로 삭제하나요?`)) {
+    //confirm 메서드는 boolean을 리턴
+    return;
+  }
+  //confirm 창에서 [확인] 누르면 visitor 데이터 삭제
+  //:axios로 DELETE /visitor 요청 날려서 db에 데이터 delete 하기
+  axios({
+    method: 'delete',
+    url: '/visitor',
+    data: {
+      id: id,
+    },
+  }).then((res) => {
+    //res값에 true가 찍혀잇움 !!
+    console.log('delete / visitor 요청에 대한 응답', res.data);
+
+    alert('삭제 성공 !');
+    //버튼(obj)의 부모의 부모 -> tr요소 제거
+    obj.parentElement.parentElement.remove();
   });
 }

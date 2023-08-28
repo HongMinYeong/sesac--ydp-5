@@ -16,4 +16,5 @@ router.post('/visitor', controller.postVisitor);
 //방명록 하나 삭제
 // router.delete('/visitor',controller.)
 
+router.delete('/visitor', controller.deleteVisitor);
 module.exports = router;

@@ -58,3 +58,16 @@ exports.postVisitor = (data, callback) => {
     }
   );
 };
+
+exports.deleteVisitor = (id, callback) => {
+  console.log('model deleteVisitor 함수 실행~ ');
+  console.log('model >>', id); //front에서 알려준 삭제할 데이터의 pk
+
+  conn.query(`DELETE FROM visitor where id=${id} `, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    console.log('model>>', rows);
+    callback(true); //{id:id} 여기서 넘기는 데이터가 달라지면 controller코드도 달라짐 !
+  });
+};

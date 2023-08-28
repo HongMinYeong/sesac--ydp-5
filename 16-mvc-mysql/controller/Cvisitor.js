@@ -31,3 +31,16 @@ exports.postVisitor = (req, res) => {
     res.send({ id: insertId, name: name, comment: comment });
   });
 };
+
+exports.deleteVisitor = (req, res) => {
+  console.log('controller deleteVisitor 함수 실행~ ');
+  console.log(req.body); // {id:xx}
+
+  const { id } = req.body;
+
+  Visitor.deleteVisitor(id, (result) => {
+    //첫번째 인자에 id를 넣고 두번째 인자에 콜백함수 넣어주깅
+    console.log('controller>>', result); //callback함수의 인자 성공시 true
+    res.send(result); //res.send(true)
+  });
+};
