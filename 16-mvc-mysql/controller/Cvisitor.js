@@ -5,5 +5,12 @@ exports.main = (req, res) => {
 };
 
 exports.getVisitors = (req, res) => {
-  res.render('visitor', { data: Visitor.getVisitors() });
+  //[before]
+  //res.render('visitor', { data: Visitor.getVisitors() });
+
+  //[after]
+  Visitor.getVisitors((result) => {
+    console.log('controller >>', result);
+    res.render('visitor', { data: result }); //model에서 받아온 result를 넘길거임
+  });
 };
