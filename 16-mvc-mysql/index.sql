@@ -1,3 +1,4 @@
+-- Active: 1693274299747@@127.0.0.1@3306
 -- user 라는 새로운 계정 생성 - mysql 사용자 추가하기
 
 CREATE USER 'user'@'%' IDENTIFIED WITH mysql_native_password by '1234';
@@ -19,9 +20,9 @@ create database mvc character set utf8mb4 collate utf8mb4_unicode_ci;
 use mvc;
 drop table visitor;
 CREATE TABLE VISITOR (
-	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	name VARCHAR(10) NOT NULL,
-	comment MEDIUMTEXT
+	ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	NAME VARCHAR(10) NOT NULL,
+	COMMENT MEDIUMTEXT
 	);
     
     DESC VISITOR;
