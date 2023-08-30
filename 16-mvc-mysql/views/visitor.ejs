@@ -54,7 +54,10 @@
           <td><%= d.name %></td>
           <td><%= d.comment %></td>
           <td>
-            <button type="button">수정</button>
+            <!-- 누가 수정되어야하는지 알려줘야되서 id 값 넘겨줘야됨  -->
+            <button type="button" onclick="editVisitor('<%= d.id%>')">
+              수정
+            </button>
           </td>
           <td>
             <button type="button" onclick="deleteVisitor(this,'<%= d.id%>')">

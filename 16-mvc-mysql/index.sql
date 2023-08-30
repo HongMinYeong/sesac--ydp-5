@@ -1,4 +1,4 @@
--- Active: 1693274299747@@127.0.0.1@3306
+-- Active: 1692777681688@@127.0.0.1@3306@mvc
 -- user 라는 새로운 계정 생성 - mysql 사용자 추가하기
 
 CREATE USER 'user'@'%' IDENTIFIED WITH mysql_native_password by '1234';
@@ -32,4 +32,4 @@ CREATE TABLE VISITOR (
 			VALUES ('1','홍길동','내가 왔다.'),
 			('2','이찬혁','으라차차');
 
-	INSERT INTO VISITOR (name, comment) VALUES ('홍민영','안뇽');
+	

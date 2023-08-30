@@ -23,16 +23,20 @@ exports.getVisitors = (callback) => {
   //   ];
   // [after]
   //db연결 객체에다가 query를 날릴거임
-  conn.query('SELECT * FROM VISITOR', (err, rows) => {
-    if (err) {
-      //만약에 에러가 발생하면 에러를 던지고
-      throw err;
+  conn.query(
+    'SELECT * FROM VISITOR ORDER BY id DESC',
+    'alter table visitor auto_increment=1',
+    (err, rows) => {
+      if (err) {
+        //만약에 에러가 발생하면 에러를 던지고
+        throw err;
+      }
+      //그게 아니라면
+      console.log('model >>', rows);
+      callback(rows); //callback으로 rows를 넘길거임
+      //이 callback을 컨트롤러가 받아올 수 있음
     }
-    //그게 아니라면
-    console.log('model >>', rows);
-    callback(rows); //callback으로 rows를 넘길거임
-    //이 callback을 컨트롤러가 받아올 수 있음
-  });
+  );
 };
 
 // model >> [
@@ -69,5 +73,28 @@ exports.deleteVisitor = (id, callback) => {
     }
     console.log('model>>', rows);
     callback(true); //{id:id} 여기서 넘기는 데이터가 달라지면 controller코드도 달라짐 !
+  });
+};
+
+exports.getVisitor = (id, callback) => {
+  conn.query(`SELECT * FROM visitor WHERE id = ${id}`, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    console.log(rows); // [ RowDataPacket { id: 8, name: 'aa', comment: 'aa' } ]
+    console.log('rows배열 0번째 인덱스', rows[0]); //rows배열 0번째 인덱스 RowDataPacket { id: 8, name: 'aa', comment: 'aa' }
+    callback(rows[0]);
+  });
+};
+
+exports.updateVisitor = (updateData, callback) => {
+  const { id, name, comment } = updateData;
+  const sql = `update visitor set name = '${name}', comment ='${comment}' where id = ${id}`;
+  conn.query(sql, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    console.log('updateVisitor rows는 ', rows);
+    callback();
   });
 };
