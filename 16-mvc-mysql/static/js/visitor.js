@@ -35,7 +35,8 @@ function createVisitor() {
     // $('tbody').append(newVisitor);
 
     //js
-    tbody.insertAdjacentHTML('beforeend', newVisitor);
+    // tbody.insertAdjacentHTML('beforeend', newVisitor);
+    tbody.insertAdjacentHTML('afterbegin', newVisitor);
   });
 }
 
