@@ -18,7 +18,7 @@ exports.register = (data, callback) => {
         throw err;
       }
       console.log('model >>', rows);
-      callback();
+      callback(rows.insertId);
     }
   );
 };

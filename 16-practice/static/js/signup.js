@@ -16,6 +16,7 @@ function register() {
     },
   })
     .then((res) => {
+      const { userid, pw, name } = res.data;
       console.log(res);
       return res.data;
     })
