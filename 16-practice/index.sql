@@ -1,6 +1,7 @@
 -- Active: 1692777681688@@127.0.0.1@3306@mvc
 -- user 라는 새로운 계정 생성 - mysql 사용자 추가하기
 
+
 CREATE USER 'user'@'%' IDENTIFIED WITH mysql_native_password by '1234';
 
 --user 계정에 DB 권한 부여 (모든 DB에 접근 가능하도록)// *.* -> 모든 데이터베이스의 모든 테이블 의미 
@@ -20,11 +21,13 @@ create database mvc character set utf8mb4 collate utf8mb4_unicode_ci;
 use mvc;
 drop table visitor;
 CREATE TABLE USER (
-	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id int NOT NULL PRIMARY KEY  AUTO_INCREMENT,
 	userid VARCHAR(20) NOT NULL,
 	name varchar(10) NOT NULL,
     pw varchar(20) NOT NULL
 	);
+
+
 
     DESC USER;
     SELECT * FROM USER;
