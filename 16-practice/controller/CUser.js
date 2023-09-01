@@ -1,4 +1,4 @@
-const User = require('../model/User');
+const models = require('../models');
 
 exports.main = (req, res) => {
   res.render('index');
@@ -12,51 +12,59 @@ exports.signin = (req, res) => {
   res.render('signin');
 };
 
-exports.post_signup = (req, res) => {
-  console.log('회원가입 폼 정보 >> ', req.body);
-
-  User.signup(req.body, () => {
-    res.end();
+exports.post_signup = async (req, res) => {
+  await models.User.create({
+    userid: req.body.userid,
+    name: req.body.name,
+    pw: req.body.pw,
   });
+  res.end();
 };
 
-exports.post_signin = (req, res) => {
-  console.log(req.body); // 폼에 입력한 로그인 정보
+exports.post_signin = async (req, res) => {
+  const result = await models.User.findOne({
+    where: {
+      userid: req.body.userid,
+      pw: req.body.pw,
+    },
+  });
+  console.log('>>>>>> ', result);
+  // 로그인 성공; result = {}
+  // 로그인 실패; result = null
+  if (result) {
+    res.send(true);
+  } else {
+    res.send(false);
+  }
+};
 
-  User.signin(req.body, (result) => {
-    console.log(result);
+exports.post_profile = async (req, res) => {
+  const result = await models.User.findOne({
+    where: { userid: req.body.userid },
+  });
+  console.log('>>>>>', result); // {}
+  if (result) {
+    res.render('profile', { data: result });
+  }
+};
 
-    if (result.length > 0) {
-      res.send(true);
-    } else {
-      res.send(false);
+exports.delete_profile = async (req, res) => {
+  await models.User.destroy({
+    where: { id: req.body.id },
+  });
+  res.end();
+};
+
+exports.edit_profile = async (req, res) => {
+  await models.User.update(
+    {
+      userid: req.body.userid,
+      name: req.body.name,
+      pw: req.body.pw,
+    },
+    {
+      where: { id: req.body.id },
     }
-  });
-};
-
-exports.post_profile = (req, res) => {
-  console.log(req.body);
-
-  User.profile(req.body.userid, (result) => {
-    console.log('result는 >>', result);
-
-    if (result.length > 0) {
-      res.render('profile', { data: result[0] });
-    }
-  });
-};
-
-exports.delete_profile = (req, res) => {
-  console.log(req.body);
-  User.delete_profile(req.body.id, () => {
-    res.end();
-  });
-};
-
-exports.edit_profile = (req, res) => {
-  console.log('req.body는 >>>', req.body);
-
-  User.edit_profile(req.body, () => {
-    res.end();
-  });
+  );
+  res.end();
 };
