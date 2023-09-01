@@ -26,7 +26,7 @@ const Detail = multer({
 });
 
 app.set('view engine', 'ejs');
-app.use('/views', express.static(__dirname + '/views'));
+app.set('views', './views'); // 뷰 폴더로 views/
 // static 미들웨어 등록
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.urlencoded({ extended: true }));

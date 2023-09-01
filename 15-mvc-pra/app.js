@@ -3,7 +3,7 @@ const app = express();
 const PORT = 8000;
 
 app.set('view engine', 'ejs');
-app.use('/views', express.static(__dirname + '/views'));
+app.set('views', './views'); // 뷰 폴더로 views/
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

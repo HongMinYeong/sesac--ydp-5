@@ -8,7 +8,7 @@ console.log(__dirname + '/static'); ///Users/user/Documents/sesac-ydp-5/08-expre
 app.set('view engine', 'ejs'); //express에서 사용할 템플릿 엔진 종류(ejs) 등록
 app.set('views', './views'); //템플릿 엔진 파일을 저장할 위치 등록
 
-app.use('/views', express.static(__dirname + '/views'));
+app.set('views', './views'); // 뷰 폴더로 views/
 //http://localhost:8080/public/img/beach2.jpg
 app.use('/public', express.static(__dirname + '/static'));
 //static 미들웨어 등록
