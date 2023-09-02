@@ -32,6 +32,9 @@ const Visitor = (Sequelize, DataTypes) => {
       // timestamps: false, //컬럼두개 굳이 필요없으면 이거
     }
   );
+  // model.prototype.dateFormat = (date) => {
+  //   return moment(date).format('LLLL');
+  // };
 
   return model;
 };

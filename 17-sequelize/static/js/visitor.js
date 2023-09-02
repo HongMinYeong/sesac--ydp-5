@@ -16,23 +16,8 @@ function createVisitor() {
     },
   }).then((res) => {
     console.log('post/visitor 요청에 대한 응답', res.data);
-    const { id, name, comment } = res.data;
+    const { id, name, comment, createdAt, updatedAt } = res.data;
     //:newVisitor 변수에 tr요소를 생성하고 ,tbody의 맨 마지막 요소로 추가
-    const create_date = new Date(res.data.createdAt);
-    const create_year = create_date.getFullYear();
-    const create_month = create_date.getMonth() + 1;
-    const create_day = create_date.getDate();
-    const create_hour = create_date.getHours(); //시간
-    const create_minutes = create_date.getMinutes();
-    const createdAt = `${create_year}년 ${create_month}월 ${create_day}일 ${create_hour}시 ${create_minutes}분`;
-
-    const updated_date = new Date(res.data.updatedAt);
-    const updated_year = updated_date.getFullYear();
-    const updated_month = updated_date.getMonth() + 1;
-    const updated_day = updated_date.getDate();
-    const updated_hour = updated_date.getHours(); //시간
-    const updated_minutes = updated_date.getMinutes();
-    const updatedAt = `${updated_year}년 ${updated_month}월 ${updated_day}일 ${updated_hour}시 ${updated_minutes}분`;
     const newVisitor = `
     <tr id="tr_${id}<">
           <td>${id}</td>
@@ -128,26 +113,10 @@ function editDo(id) {
     if (isUpdated) {
       alert('수정 완료!!');
     }
-    const create_date = new Date(res.data.createdAt);
-    const create_year = create_date.getFullYear();
-    const create_month = create_date.getMonth() + 1;
-    const create_day = create_date.getDate();
-    const create_hour = create_date.getHours(); //시간
-    const create_minutes = create_date.getMinutes();
-    const createdAt = `${create_year}년 ${create_month}월 ${create_day}일 ${create_hour}시 ${create_minutes}분`;
-
-    const updated_date = new Date(res.data.updatedAt);
-    const updated_year = updated_date.getFullYear();
-    const updated_month = updated_date.getMonth() + 1;
-    const updated_day = updated_date.getDate();
-    const updated_hour = updated_date.getHours(); //시간
-    const updated_minutes = updated_date.getMinutes();
-    const updatedAt = `${updated_year}년 ${updated_month}월 ${updated_day}일 ${updated_hour}시 ${updated_minutes}분`;
     const tr = document.querySelector(`#tr_${id}`).children; //tr의 0번째는 id
     tr[1].textContent = form.name.value;
     tr[2].textContent = form.comment.value;
-    tr[5].innerHTML = createdAt;
-    tr[6].innerHTML = updatedAt;
+    tr[6].textContent = res.data.updatedAt;
     form.name.value = ''; //폼 초기화
     form.comment.value = ''; //폼 초기화
 

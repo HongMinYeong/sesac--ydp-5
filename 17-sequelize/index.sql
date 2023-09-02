@@ -1,4 +1,4 @@
--- Active: 1692777681688@@127.0.0.1@3306@mvc
+-- Active: 1693274299747@@127.0.0.1@3306@mvc
 -- user 라는 새로운 계정 생성 - mysql 사용자 추가하기
 
 CREATE USER 'user'@'%' IDENTIFIED WITH mysql_native_password by '1234';
