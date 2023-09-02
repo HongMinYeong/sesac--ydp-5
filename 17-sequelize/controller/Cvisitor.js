@@ -2,6 +2,7 @@
 // const models = require('../models'); // ../models/index.js
 //위에 코드를 구조분해
 const { Visitor } = require('../models');
+const {Op} = require("sequelize");
 exports.main = (req, res) => {
   res.render('index');
 };
@@ -29,10 +30,14 @@ exports.postVisitor = async (req, res) => {
   //   res.send({ id: insertId, name: name, comment: comment });
   // });
   //[after]
+  console.log('req.body 는 ', req.body);
   const { name, comment } = req.body;
+  
   const result = await Visitor.create({
     name,
     comment,
+    createdAt:,
+    updatedAt,
   });
   //console.log(result); -> create 메서드가 실행된 결과 (== insert 한 데이터 값)
   res.send(result); //result 보내주기전엔 undefined 뜸
@@ -91,6 +96,7 @@ exports.updateVisitor = async (req, res) => {
     {
       name: req.body.name,
       comment: req.body.comment,
+      
     },
     {
       where: {
