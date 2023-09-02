@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = 8000;
+const db = require('./models');
 
 app.set('view engine', 'ejs');
 app.set('views', './views'); // 뷰 폴더로 views/
@@ -15,6 +16,8 @@ app.get('*', (req, res) => {
   res.render('404');
 });
 
-app.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}`);
+db.sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}`);
+  });
 });

@@ -1,4 +1,4 @@
-const models = require('../models');
+const { User } = require('../models');
 
 exports.main = (req, res) => {
   res.render('index');
@@ -13,7 +13,7 @@ exports.signin = (req, res) => {
 };
 
 exports.post_signup = async (req, res) => {
-  await models.User.create({
+  await User.create({
     userid: req.body.userid,
     name: req.body.name,
     pw: req.body.pw,
@@ -22,7 +22,7 @@ exports.post_signup = async (req, res) => {
 };
 
 exports.post_signin = async (req, res) => {
-  const result = await models.User.findOne({
+  const result = await User.findOne({
     where: {
       userid: req.body.userid,
       pw: req.body.pw,
@@ -39,7 +39,7 @@ exports.post_signin = async (req, res) => {
 };
 
 exports.post_profile = async (req, res) => {
-  const result = await models.User.findOne({
+  const result = await User.findOne({
     where: { userid: req.body.userid },
   });
   console.log('>>>>>', result); // {}
@@ -49,14 +49,14 @@ exports.post_profile = async (req, res) => {
 };
 
 exports.delete_profile = async (req, res) => {
-  await models.User.destroy({
+  await User.destroy({
     where: { id: req.body.id },
   });
   res.end();
 };
 
 exports.edit_profile = async (req, res) => {
-  await models.User.update(
+  await User.update(
     {
       userid: req.body.userid,
       name: req.body.name,

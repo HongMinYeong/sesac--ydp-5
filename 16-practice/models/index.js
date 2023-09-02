@@ -4,6 +4,7 @@ const Sequelize = require('sequelize');
 
 const config = require(__dirname + '/../config/config.json')['development'];
 const db = {};
+
 const sequelize = new Sequelize(
   config.database,
   config.username,
@@ -11,9 +12,9 @@ const sequelize = new Sequelize(
   config
 );
 
+db.User = require('./User')(sequelize, Sequelize);
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
-db.User = require('./User')(sequelize, Sequelize);
 
 module.exports = db;
