@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>회원가입, 로그인, 회원정보수정 실습 (with. 세션)</h1>
+    <%if(result){%>
+    <p><%= name%>님 환영합니다 🙌🏻</p>
+    <%}else{%>
+    <p>로그인을 아직 하지 않으셨군요! 로그인을 진행해보세요!</p>
+    <%}%>
+    <br />
+    <a href="/register">회원가입</a>
+    <a href="/login">로그인</a>
+    <a href="/users">전체회원</a>
+  </body>
+</html>
