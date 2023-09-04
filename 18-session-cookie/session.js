@@ -1,6 +1,8 @@
 const express = require('express');
 const session = require('express-session');
 const app = express();
+const dotenv = require('dotenv');
+dotenv.config();
 const PORT = 8080;
 
 app.set('view engine', 'ejs');
@@ -8,7 +10,7 @@ app.set('view engine', 'ejs');
 app.use(
   session({
     //세션 객체 생성
-    secret: 'MySessionSecretKey',
+    secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
     cookie: {
