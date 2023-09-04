@@ -16,7 +16,7 @@ exports.getVisitors = async (req, res) => {
   // });
   const result = await Visitor.findAll();
   console.log(result);
-  res.render('visitor', { data: result }); //model에서 받아온 result를 넘길거임
+  res.render('visitor', { data: result });
 };
 
 exports.postVisitor = async (req, res) => {
