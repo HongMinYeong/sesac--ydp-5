@@ -2,10 +2,27 @@
 // TODO: bcrypt 패키지 불러오기
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
+// 비밀번호 암호화 함수 => (선택) 가능하다면 비밀번호 암호화와 관련된 별도의 모듈로 작성해보기! (utils/encrypt.js)
+const saltRounds = 11;
+// TODO: 비밀번호를 해싱하는 함수 정의 (bcryptPassword)
+function hashPassword(password) {
+  return bcrypt.hashSync(password, saltRounds);
+}
+
+// TODO:비밀번호와 원본 비번을를 비교하는 함수 (compareFunc)
+function comparePassword(password, hashPassword) {
+  return bcrypt.compareSync(password, hashPassword);
+}
 
 exports.index = (req, res) => {
   // index.ejs 랜더 (data 키로 session 객체의 userInfo 전달)
-  res.render('index', { data: req.session.userInfo });
+  const userSession = req.session.userInfo;
+  console.log(userSession);
+  if (userSession !== undefined) {
+    res.render('index', { isLogin: true, data: req.session.userInfo });
+  } else {
+    res.render('index', { isLogin: false, data: req.session.userInfo });
+  }
 };
 
 exports.getRegister = (req, res) => {
@@ -21,8 +38,13 @@ exports.getLogin = (req, res) => {
 exports.getUsers = async (req, res) => {
   // 세션에 userInfo 데이터가 있다면; 전체 유저를 찾음
   const result = await User.findAll();
+
   if (req.session.userInfo) {
-    res.render('users', { data: result });
+    console.log('result는 ~~', result);
+    res.render('users', {
+      name: req.session.userInfo.name,
+      users: result,
+    });
   } else {
     res.redirect('/login');
   }
@@ -33,67 +55,92 @@ exports.getUsers = async (req, res) => {
 exports.getProfile = async (req, res) => {
   // 1. userInfo 세션에 저장된 id를 이용해 현재 로그인한 유저의 id 값으로 특정 유저 정보 하나를 조회
   // 2. profile.ejs 랜더 + data 키로 특정 유저를 찾은 결과를 넘김
+  // const user_id = req.session.userInfo.userid;
+  console.log('req.session.userInfo는~~ ', req.session.userInfo);
+  const user = await User.findOne({
+    where: { userid: req.session.userInfo.userid },
+  });
+  res.render('profile', { data: user });
 };
 
 exports.postRegister = async (req, res) => {
   // 회원가입 요청시 비밀번호는 암호화한 값으로 DB에 추가
   console.log('req.body는 ', req.body);
-  const { userid, pw, name } = req.body;
-  const password = hashedPassword(pw);
+  //{ userid: 'minyung1240', pw: '1111', name: '홍민영' }
+  const password = hashPassword(req.body.pw); //패스워드 암호화
   const make = await User.create({
-    password,
-    name,
-    userid,
+    pw: password,
+    name: req.body.name,
+    userid: req.body.userid,
   });
-  res.send({ result: true, make });
-  // 응답은 {result: true}
+  res.send({ result: true });
 };
 
 exports.postLogin = async (req, res) => {
   // Step1. 아이디를 찾아서 사용자 존재 유무 체크
-  const result = await User.findOne({
+  const user = await User.findOne({
     where: { userid: req.body.userid },
   });
+  console.log('user는 ', user);
+  // user {
+  //   dataValues: {
+  //     id: 1,
+  //     pw: '$2b$11$luEpWttcvZQpmKp84iv1O.CEhcwSSPbJS9b3kIn2CqpCVIIFryQc6',
+  //     name: '홍민영',
+  //     userid: 'minyung1240'
+  //   },
+
   // Step2. 입력된 비밀번호 암호화하여 기존 데이터와 비교
   // 2-1. 유저 있음
-  if (result) {
-    comparePassword(req.body.pw, password);
-  }
   // 2-1-1. 비밀번호 일치;
   //    userInfo 키 값으로 세션 생성 (userInfo는 name키와 id 키를 갖는 "객체")
   //    응답 데이터: { result: true, data: step1에서 찾은 유저 }
-  res.send({ result: true, data: req.body.id });
-  // 2-1-2. 비밀번호 불일치;
-  //    응답 데이터; { result: false, message: '비밀번호가 틀렸습니다.'
-  // 2-2. 유저 없음
-  //    응답 데이터; { result: false, message: '존재하는 사용자가 없습니다' }
+  if (user !== null) {
+    console.log('user 조건문시작~');
+    if (comparePassword(req.body.pw, user.pw)) {
+      // console.log('userinfo.name은 ', req.session.userInfo); //userinfo.name은  minyung1240
+      req.session.userInfo = user;
+      console.log('userinfo는  ', req.session.userInfo);
+      res.send({ result: true, data: user });
+    } else {
+      console.log('비밀번호 불일치');
+      // 2-1-2. 비밀번호 불일치;
+      //    응답 데이터; { result: false, message: '비밀번호가 틀렸습니다.'
+      res.send({ result: false, message: '비밀번호가 틀렸습니다.' });
+    }
+  } else {
+    // 2-2. 유저 없음
+    //    응답 데이터; { result: false, message: '존재하는 사용자가 없습니다' }
+    res.send({ result: false, message: '존재하는 사용자가 없습니다' });
+  }
 };
 
 exports.patchProfile = async (req, res) => {
   // 사용자가 요청한 데이터를 변경
+  await User.update(
+    {
+      name: req.body.name,
+      pw: req.body.pw,
+    },
+    {
+      where: { userid: req.body.userid },
+    }
+  );
+  res.send({ result: true });
   // 응답 데이터; { result: true }
 };
 
 exports.deleteUser = async (req, res) => {
   // 1. 유저 삭제
-  req.session.UserInfo.destroy((err) => {
+  const isDeleted = await User.destroy({
+    where: { userid: req.session.userInfo.userid },
+  });
+  // 2. 세션 삭제
+  req.session.destroy((err) => {
     if (err) {
       console.log(err);
       return;
     }
-    res.direct('/');
   });
-  // 2. 세션 삭제
+  res.send({ result: true });
 };
-
-// 비밀번호 암호화 함수 => (선택) 가능하다면 비밀번호 암호화와 관련된 별도의 모듈로 작성해보기! (utils/encrypt.js)
-const saltRounds = 11;
-// TODO: 비밀번호를 해싱하는 함수 정의 (bcryptPassword)
-function hashPassword(password) {
-  return bcrypt.hashSync(password, saltRounds);
-}
-
-// TODO:비밀번호와 원본 비번을를 비교하는 함수 (compareFunc)
-function comparePassword(password, hashedPassword) {
-  return bcrypt.compareSync(password, hashedPassword);
-}
