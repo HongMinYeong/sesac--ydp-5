@@ -6,11 +6,12 @@ import Counter from './Counter';
 import Handler_ex from './ex/Handler_ex';
 import ChangeColor from './ex/ex2';
 import Ex3 from './ex/ex3';
+import Ex4 from './ex/ex4';
 
 function App() {
   return (
     <div className="App">
-      <SyntheticEvent />
+      {/* <SyntheticEvent />
       <hr />
       <ClassBind />
       <hr />
@@ -20,7 +21,8 @@ function App() {
       <hr />
       <ChangeColor />
       <hr />
-      <Ex3 />
+      <Ex3 /> */}
+      <Ex4 />
     </div>
   );
 }
