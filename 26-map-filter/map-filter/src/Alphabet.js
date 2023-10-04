@@ -50,13 +50,16 @@ export default function Alphabet() {
   };
   const handleKeyEvent = (e) => {
     console.log(e);
+    if (e.nativeEvent.isComposing) {
+      return;
+    }
     if (e.code === 'Enter') {
       addAlpha();
     }
 
-    if (e.keyCode === 13) {
-      addAlpha();
-    }
+    // if (e.keyCode === 13) {
+    //   addAlpha();
+    // }
   };
   return (
     <div>
