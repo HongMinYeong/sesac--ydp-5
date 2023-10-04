@@ -1,11 +1,23 @@
 import { useState } from 'react';
-function Select({ setFruit, setBackgroundColor, setTextColor }) {
+function Select(props) {
+  const setData = props.setData;
+  const handleInput = (e) => {
+    const content = e.target.value;
+
+    setData((data) => {
+      console.log(data); //이전 state 값
+      // return { ...data, content: content };
+      return { ...data, content }; //나머지는 그대로 content 바뀜
+    });
+  };
   return (
     <>
       과일 :
       <select
         onChange={(e) => {
-          setFruit(e.target.value);
+          setData((data) => {
+            return { ...data, fruit: e.target.value };
+          });
         }}
       >
         <option value="apple">사과</option>
@@ -16,7 +28,9 @@ function Select({ setFruit, setBackgroundColor, setTextColor }) {
       배경색 :
       <select
         onChange={(e) => {
-          setBackgroundColor(e.target.value);
+          setData((data) => {
+            return { ...data, background: e.target.value };
+          });
         }}
       >
         <option value="black">검정</option>
@@ -32,7 +46,9 @@ function Select({ setFruit, setBackgroundColor, setTextColor }) {
       글자색 :
       <select
         onChange={(e) => {
-          setTextColor(e.target.value);
+          setData((data) => {
+            return { ...data, color: e.target.value };
+          });
         }}
       >
         <option value="black">검정</option>
