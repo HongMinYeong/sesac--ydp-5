@@ -2,6 +2,7 @@ import RefSample1 from './RefSample1';
 import RefSample2 from './RefSample2';
 import RefSample3 from './RefSample3';
 import RefSample4 from './RefSample4';
+import RefPr from './RefPr';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
       <hr />
       {/* 클래스형 컴포넌트; ref 사용방법 2. createRef() */}
       <RefSample4 />
+      <hr />
+      <RefPr />
     </div>
   );
 }
