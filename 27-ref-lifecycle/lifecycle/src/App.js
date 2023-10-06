@@ -3,11 +3,13 @@ import RefSample2 from './RefSample2';
 import RefSample3 from './RefSample3';
 import RefSample4 from './RefSample4';
 import RefPr from './RefPr';
+import LifeCycleFunc from './LifeCycleFunc';
+import LifeCycleClass from './LifeCycleClass';
 
 function App() {
   return (
     <div className="App">
-      {/* 함수형 컴포넌트; useRef()로 DOM 요소에 직접 접근 */}
+      {/* 함수형 컴포넌트; useRef()로 DOM 요소에 직접 접근
       <RefSample1 />
       <hr />
 
@@ -22,6 +24,10 @@ function App() {
       <RefSample4 />
       <hr />
       <RefPr />
+      <hr />
+      <LifeCycleFunc />
+      <hr />
+      <LifeCycleClass />
     </div>
   );
 }
