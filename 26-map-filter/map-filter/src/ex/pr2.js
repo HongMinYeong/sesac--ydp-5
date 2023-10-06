@@ -122,24 +122,28 @@ export default function Pr2() {
       </table>
 
       <h3>댓글 검색 결과</h3>
-      <table border={1} style={{ margin: '30px auto', width: '500px' }}>
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-          </tr>
-        </thead>
-        <tbody>
-          {result.map((cmt, idx) => (
-            <tr key={idx + 1}>
-              <td>{idx + 1}</td>
-              <td>{cmt.title}</td>
-              <td>{cmt.writer}</td>
+      {result.length > 0 ? (
+        <table border={1} style={{ margin: '30px auto', width: '500px' }}>
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>제목</th>
+              <th>작성자</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {result.map((cmt, idx) => (
+              <tr key={idx + 1}>
+                <td>{idx + 1}</td>
+                <td>{cmt.title}</td>
+                <td>{cmt.writer}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div>검색 결과가 없습니다.</div>
+      )}
     </div>
   );
 }
