@@ -1,0 +1,30 @@
+.header {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  background-color: blue;
+  border-radius: 20px;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .color {
+      color: rgb(21, 114, 196);
+    }
+    .color2 {
+      color: rgb(117, 124, 129);
+    }
+    .item {
+      margin: 20px auto;
+      width: 800px;
+      height: 100px;
+      text-align: center;
+      background-color: aliceblue;
+      border-radius: 20px;
+      .body {
+        font-weight: bold;
+      }
+    }
+  }
+}

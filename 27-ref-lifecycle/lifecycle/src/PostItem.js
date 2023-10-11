@@ -71,17 +71,17 @@ export default function PostItem({ number }) {
   };
 
   return (
-    <div style={{ background: 'skyblue' }}>
+    <div className="container">
       {!isShow && <h2>Loading...</h2>}
       {isShow &&
         fakePosts.map((value) => (
-          <div key={value.id}>
-            <div>
-              No.{value.id} - {value.title}
-            </div>
+          <div className="item" key={value.id}>
+            <span className="color">
+              No.{value.id} <span className="color2">- {value.title}</span>
+            </span>
             <br />
-            <div>{value.body}</div>
-            <hr />
+            <br />
+            <div className="body">{value.body}</div>
             <br />
           </div>
         ))}
