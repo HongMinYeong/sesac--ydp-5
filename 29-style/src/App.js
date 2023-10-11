@@ -1,6 +1,7 @@
 import CssModuleComponents from './CssModuleComponents';
 import SassComponent from './SassComponent';
 import StyledComponent from './StyledComponent';
+import Mix from './Mix';
 import './styles/App.css';
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
 
       <h2>styled-components</h2>
       <StyledComponent />
+      <h2>Sass 실습</h2>
+      <Mix />
     </div>
   );
 }
