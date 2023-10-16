@@ -4,6 +4,8 @@ import UseCallbackEx2 from './components/UseCallbackEx2';
 import UseMemoEx from './components/UseMemoEx';
 import UseReducerEx from './components/UseReducerEx';
 import useTitle from './hooks/useTitle';
+import Form from './components/react-hook-form/Form';
+import FormPractice from './components/react-hook-form/FormPractice';
 function App() {
   useTitle('React Hooks 연습중입니다.');
 
@@ -21,6 +23,10 @@ function App() {
       <UseReducerEx />
       <hr />
       <Faq />
+      <hr />
+      <Form />
+      <hr />
+      <FormPractice />
     </div>
   );
 }
