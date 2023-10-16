@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductItem from './ProductItem';
+import axios from 'axios';
 
 export const productInfos = [
   {

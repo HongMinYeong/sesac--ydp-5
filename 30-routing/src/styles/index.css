@@ -19,3 +19,22 @@ code {
   background-color: #333;
   color: #fff;
 }
+.product:hover {
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  overflow-y: visible;
+  background-color: red;
+}
+.product {
+  background-color: #a9c3e5;
+  border-radius: 20px;
+  color: black;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  width: 600px;
+  height: 100px;
+}
+.productItem {
+  text-decoration: none;
+}

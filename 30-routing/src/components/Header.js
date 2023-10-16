@@ -11,6 +11,9 @@ export default function Header() {
         <li>
           <Link to="/products">Products</Link>
         </li>
+        <li>
+          <Link to="/photos">Photos</Link>
+        </li>
       </ul>
     </header>
   );
