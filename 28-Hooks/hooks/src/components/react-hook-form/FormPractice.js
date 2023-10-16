@@ -30,6 +30,9 @@ export default function Form() {
           placeholder="username"
           {...register('username', {
             required: '이름은 필수 항목입니다',
+            validate: {
+              isBlank: (v) => v.trim() !== '' || '이름은 필수 항목입니다.',
+            },
           })}
         />
         {errors.username?.message}
