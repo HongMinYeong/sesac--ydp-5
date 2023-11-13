@@ -5,14 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+
+  <body>
+    <h1>웹소켓이지렁이</h1>
+
+    <!-- 채팅 내역  -->
+    <ul></ul>
+    <!-- 채팅 인풋  -->
+    <form id="chat">
+      이름<input type="text" id="name" class="name" /><br />
+      내용<input type="text" id="message" class="message" /><br />
+      <button>전송</button>
+    </form>
+  </body>
   <script>
-    const socket = new WebSocket('ws://loaclhost:8000');
+    const socket = new WebSocket('ws://localhost:8080');
 
     socket.addEventListener('open', (event) => {
       console.log('서버에 연결되었습니다.');
 
       socket.addEventListener('message', (event) => {
-        console.log(`서버로부터 받은 멧지: ${event.data}`);
+        console.log(`서버로부터 받은 메시지: ${event.data}`);
       });
 
       socket.addEventListener('error', (event) => {
@@ -24,7 +37,4 @@
       });
     });
   </script>
-  <body>
-    웹소켓이지렁이
-  </body>
 </html>
