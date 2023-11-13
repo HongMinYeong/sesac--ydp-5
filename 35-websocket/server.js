@@ -20,12 +20,15 @@ const sockets = []; //클라이언트들을 저장할 배열
 
 //최초 연결
 wss.on('connection', (socket) => {
-  console.log(`클라이언트가 연결되었습니다.:${socket.id}`); //콜백으로 클라이언트 소켓정보를 받아옴
-
+  console.log(`클라이언트가 연결되었습니다.:${socket}`); //콜백으로 클라이언트 소켓정보를 받아옴
+  sockets.push(socket);
   socket.on('message', (message) => {
-    console.log(`클라이언트로 부터 받은 메시지: ${message}`);
-
-    socket.send(`서버에서 받은 메시지:${message}`);
+    console.log(`클라이언트로 부터 받은 메시지 -> ${message}`);
+    //웹 소켓 서버에 접속한 모든 클라이언트(브라우저 탭) 에게 메세지 전송
+    //= 브로드 캐스팅(여러 컴퓨터한테 데이터 전송)
+    sockets.forEach((socket) => {
+      socket.send(`${message}`);
+    });
   });
   socket.on('error', (error) => {
     console.error('오류가 발생했습니다.', error);
