@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    const socket = new WebSocket('ws://loaclhost:8000');
+
+    socket.addEventListener('open', (event) => {
+      console.log('서버에 연결되었습니다.');
+
+      socket.addEventListener('message', (event) => {
+        console.log(`서버로부터 받은 멧지: ${event.data}`);
+      });
+
+      socket.addEventListener('error', (event) => {
+        console.error('오류가 발생했습니다. :', event.error);
+      });
+
+      socket.addEventListener('close', (event) => {
+        console.log('서버와 연결이 종료되었습니다. ');
+      });
+    });
+  </script>
+  <body>
+    웹소켓이지렁이
+  </body>
+</html>
