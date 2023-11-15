@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>socket.io 채팅</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- css -->
+    <style>
+      main {
+        background-color: rgb(82, 73, 87);
+      }
+      /* body {
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 1) 2em
+        );
+        font: 16px 'Arial', sans-serif;
+        background-color: rgb(226, 199, 237);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+      } */
+
+      .chat-box {
+        width: 500px;
+        height: 300px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .chat-list {
+        padding: 15px;
+        overflow-y: auto;
+        max-height: calc(100% - 60px);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .my-chat,
+      .other-chat {
+        margin-bottom: 10px;
+      }
+
+      .my-chat div,
+      .other-chat div {
+        padding: 12px;
+        border-radius: 8px;
+        word-wrap: break-word;
+        max-width: 100%;
+      }
+
+      .my-chat {
+        align-self: flex-end;
+        /* text-align: right; */
+        /* float: right; */
+        background-color: #fff;
+        padding: 5px;
+        border-radius: 8px;
+      }
+
+      .my-chat div {
+        background-color: white;
+        /* display: inline-block; */
+        width: fit-content;
+      }
+
+      .other-chat div {
+        background-color: rgb(73, 73, 204);
+        color: rgb(213, 232, 241);
+        display: inline-block;
+      }
+
+      input[type='text'] {
+        width: calc(100% - 30px);
+        display: flex;
+        padding: 10px;
+        border: none;
+        border-top: 1px solid #ccc;
+        border-radius: 0 0 10px 10px;
+        box-sizing: border-box;
+        outline: none;
+        margin-right: 15px;
+      }
+
+      input[type='text']:focus {
+        border-color: #4caf50;
+      }
+
+      button {
+        width: 60px;
+        padding: 10px;
+        background-color: rgb(150, 175, 76);
+        color: rgb(7, 7, 7);
+        border: none;
+        border-radius: 0 0 10px 10px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: rgb(114, 59, 137);
+      }
+
+      .input {
+        display: flex;
+      }
+      .notice {
+        text-align: center;
+      }
+
+      .d-none {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h1>My Chat</h1> -->
+    <!-- [실습1] 각 버튼 누를 때 마다 서버로 메시지 보내기  -->
+    <!-- <button onclick="sayMeow()">냐옹</button>
+    <button onclick="sayBow()">멍멍</button>
+    <button onclick="sayMingle()">응애</button>
+    <p id="form-server"></p> -->
+    <div class="entry-box">
+      <input
+        type="text"
+        id="nickname"
+        placeholder="닉네임"
+        autofocus
+        onkeypress="if(window.event.keyCode==13){join()}"
+      />
+      <button type="button" onclick="join();">입장</button>
+    </div>
+    <!-- [실습2] 채팅 UI -->
+    <div id="log">
+      <main class="chat-box d-none">
+        <div class="chat-list">
+          <!-- 임시 대화 데이터 -->
+          <div class="my-chat">
+            <div>
+              왜
+              <!-- <span class="meta">user1</span><span class="meta">: msg1</span> -->
+            </div>
+          </div>
+          <div class="other-chat">
+            <div>
+              <span class="meta">user2</span><span class="meta">: msg2</span>
+            </div>
+          </div>
+        </div>
+        <!-- 입력 필드 및 전송 버튼 추가 -->
+        <div class="input">
+          <!-- 메세지 전송 영역 -->
+          <select id="nick-list"></select
+          >에게
+          <input
+            type="text"
+            id="message"
+            onkeypress="if(window.event.keyCode==13){send()}"
+          />
+          <button type="button" onclick="send();">전송</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- js -->
+    <script>
+      let nickName;
+      let id;
+      let socket = io.connect();
+      socket.on('connect', () => {
+        console.log('클라이언트 연결 완료 :: ', socket.id);
+        id = socket.id;
+      });
+
+      //   [실습 3-2] 채팅창 입장 문구 socket.id -> nickName
+      function join() {
+        const joinUser = document.querySelector('#nickname');
+        nickName = joinUser.value;
+        socket.emit('setNick', nickName);
+        socket.emit('joinRoom', nickName, id, (res) => {
+          if (res && res.isOk) {
+            console.log('successfully join', res);
+            console.log(res.data);
+            document
+              .querySelector('.chat-list')
+              .insertAdjacentHTML(
+                'beforeend',
+                `<div class="notice">${res.data.chat}</div>`
+              );
+          } else {
+            console.log('fail to join', res);
+          }
+        });
+      }
+      socket.on('error', (data) => {
+        alert(data);
+      });
+
+      // [실습3-2] 채팅창 입장 문구 socket.id -> nickname
+      // 입장 성공: 닉네임 입력창 비활성화
+      socket.on('entrySuccess', (nick) => {
+        nickName = nick; //내 닉네임 저장
+        document.querySelector('#nickname').disabled = true;
+        document.querySelector('.entry-box > button').disabled = true;
+        document.querySelector('.chat-box').classList.remove('d-none'); //채팅창 안보이기
+      });
+
+      //   실습[3-2] 채팅창 입장 문구 socket.id -> nickname
+      // 유저 목록 업데이트 (select 박스의 option 태그 개수 변경 )
+      socket.on('updateNicks', (nickObjs) => {
+        //nickObjs : {socket.id:nick1,socket.id:nick2}
+        let options = `<option value="all">전체</option>`;
+        console.log(nickObjs);
+        //TODO:nickObjs 반복 돌아서 option태그 추가
+        //option 태그의 value 속성 값은 socket.id, option 태그의 컨텐츠는 nick 값
+        for (let key in nickObjs) {
+          options += `<option value="${key}">${nickObjs[key]}</option>`;
+        }
+        document.querySelector('#nick-list').innerHTML = options;
+      });
+
+      //[실습4] 채팅창 메시지 전송 step1
+      //"send" 이벤트 전송 {닉네임, 입력창 내용}
+      function send() {
+        event.preventDefault();
+        const msg = document.querySelector('#message').value;
+        //"send" 이벤트 전송 {닉네임, 입력창 내용}
+        socket.emit('sendMessage', nickName, msg, () => {
+          msg.value = '';
+        });
+        socket.on('message', (res) => {
+          console.log('서버로부터 메시지 수신', res.data);
+          console.log(res);
+          if (res.isMine[id] === nickName) {
+            const div = document.createElement('div');
+            div.innerText = `${res.data}`;
+            div.classList.add('my-chat');
+            const chat = document.querySelector('.chat-list');
+            chat.appendChild(div);
+          } else {
+            const div = document.createElement('div');
+            div.innerText = `${res.data}`;
+            div.classList.add('other-chat');
+            const chat = document.querySelector('.chat-list');
+            chat.appendChild(div);
+          }
+        });
+
+        // socket.on('message', nickName, msg, (res) => {
+        //   if (res.isMine[id] === nickName) {
+        //     const div = document.createElement('div');
+        //     div.innerText = `${res.data}`;
+        //     div.classList.add('my-chat');
+        //     const chat = document.querySelector('.chat-list');
+        //     chat.appendChild(div);
+        //   } else {
+        //     const div = document.createElement('div');
+        //     div.innerText = `${res.data}`;
+        //     div.classList.add('other-chat');
+        //     const chat = document.querySelector('.chat-list');
+        //     chat.appendChild(div);
+        //   }
+        // });
+      }
+      socket.on('log', (data) => {
+        console.log(data);
+      });
+      //newMessage 이벤트를 받아서
+      //내가 보내는건 오른쪽
+      //남이 보내는건 왼쪽
+
+      // [실습1]
+      //   function sayMeow() {
+      //     const messageElement = document.createElement('div');
+      //     socket.emit('meow', { who: 'cat', msg: '냐아아아옹' });
+      //     socket.on('helloCat', (data) => {
+      //       console.log(`${data.who} :: ${data.msg}`);
+      //       messageElement.textContent = `${data.who} :: ${data.msg}`;
+      //     });
+      //     document.querySelector('#form-server').appendChild(messageElement);
+      //   }
+      //   function sayBow() {
+      //     const messageElement = document.createElement('div');
+      //     socket.emit('bow', { who: 'dog', msg: '왈왈와아ㅗㄹㅇ왈으르를렁왈' });
+      //     socket.on('helloDog', (data) => {
+      //       messageElement.textContent = `${data.who} :: ${data.msg}`;
+      //     });
+      //     document.querySelector('#form-server').appendChild(messageElement);
+      //   }
+      //   function sayMingle() {
+      //     const messageElement = document.createElement('div');
+      //     socket.emit('mingle', {
+      //       who: '애기',
+      //       msg: '응애애애앵ㅇ이잏히읗ㅇ응애애애',
+      //     });
+      //     socket.on('helloBaby', (data) => {
+      //       messageElement.textContent = `${data.who} :: ${data.msg}`;
+      //     });
+      //     document.querySelector('#form-server').appendChild(messageElement);
+      //   }
+    </script>
+  </body>
+</html>
