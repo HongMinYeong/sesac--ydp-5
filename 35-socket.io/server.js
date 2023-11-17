@@ -70,15 +70,11 @@ io.on('connection', (socket) => {
   //[실습4] 채팅창 메세지 전송 step1
   //send 이벤트를 받아서
   //모두에게 newMessage 이벤트로 {닉네임,입력창내용} 데이터를 전송
-  socket.on('sendMessage', (nickName, msg) => {
-    try {
-      // `${nickName} : ${msg}`;
-      io.emit('message', async (cb) => {
-        cb({ isOk: true, data: `${nickName} : ${msg}`, isMine: nickObjs });
-      });
-    } catch (error) {
-      console.error('에러당!', error);
-    }
+  socket.on('send', (data) => {
+    console.log('send 이벤트로 받은 data:: ', data);
+    // send 이벤트로 받은 data::  { myNick: '민민al', msg: 'gg' }
+    //전체로 보냄
+    io.emit('newMessage', { nick: data.myNick, msg: data.msg });
   });
 
   //   socket.on('meow', (data) => {

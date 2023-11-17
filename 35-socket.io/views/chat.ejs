@@ -144,17 +144,6 @@
       <main class="chat-box d-none">
         <div class="chat-list">
           <!-- 임시 대화 데이터 -->
-          <div class="my-chat">
-            <div>
-              왜
-              <!-- <span class="meta">user1</span><span class="meta">: msg1</span> -->
-            </div>
-          </div>
-          <div class="other-chat">
-            <div>
-              <span class="meta">user2</span><span class="meta">: msg2</span>
-            </div>
-          </div>
         </div>
         <!-- 입력 필드 및 전송 버튼 추가 -->
         <div class="input">
@@ -234,49 +223,47 @@
         event.preventDefault();
         const msg = document.querySelector('#message').value;
         //"send" 이벤트 전송 {닉네임, 입력창 내용}
-        socket.emit('sendMessage', nickName, msg, () => {
-          msg.value = '';
-        });
-        socket.on('message', (res) => {
-          console.log('서버로부터 메시지 수신', res.data);
-          console.log(res);
-          if (res.isMine[id] === nickName) {
-            const div = document.createElement('div');
-            div.innerText = `${res.data}`;
-            div.classList.add('my-chat');
-            const chat = document.querySelector('.chat-list');
-            chat.appendChild(div);
-          } else {
-            const div = document.createElement('div');
-            div.innerText = `${res.data}`;
-            div.classList.add('other-chat');
-            const chat = document.querySelector('.chat-list');
-            chat.appendChild(div);
-          }
-        });
 
-        // socket.on('message', nickName, msg, (res) => {
-        //   if (res.isMine[id] === nickName) {
-        //     const div = document.createElement('div');
-        //     div.innerText = `${res.data}`;
-        //     div.classList.add('my-chat');
-        //     const chat = document.querySelector('.chat-list');
-        //     chat.appendChild(div);
-        //   } else {
-        //     const div = document.createElement('div');
-        //     div.innerText = `${res.data}`;
-        //     div.classList.add('other-chat');
-        //     const chat = document.querySelector('.chat-list');
-        //     chat.appendChild(div);
-        //   }
-        // });
+        const data = {
+          myNick: nickName, //내 닉네임
+          msg: document.querySelector('#message').value, //메세지 내용
+        };
+        socket.emit('send', data);
+        document.querySelector('#message').value = ''; //인풋 초기화
       }
-      socket.on('log', (data) => {
+
+      socket.on('newMessage', (data) => {
         console.log(data);
+
+        //내가 생성해야할 채팅 구조
+        // <div class="my-chat">
+        //     <div>
+        //       왜
+        //       <span class="meta">user1</span><span class="meta">: msg1</span>
+        //     </div>
+        //   </div>
+        //   <div class="other-chat">
+        //     <div>
+        //       <span class="meta">user2</span><span class="meta">: msg2</span>
+        //     </div>
+        //   </div>
+        let chatList = document.querySelector('.chat-list');
+        let div = document.createElement('div'); //.my-chat or .other-chat
+        let divChat = document.createElement('div'); //가장 안쪽 div
+        if (data.nick === nickName) {
+          //내 채팅이라면
+          div.classList.add('my-chat');
+        } else {
+          //다른 사람 채팅이라면
+          div.classList.add('other-chat');
+        }
+        divChat.textContent = `${data.nick}:${data.msg}`;
+        div.append(divChat);
+        chatList.append(div);
+
+        //메시지가 많아져서 스크롤이 생기더라도 하단 고정
+        chatList.scrollTop = chatList.scrollHeight;
       });
-      //newMessage 이벤트를 받아서
-      //내가 보내는건 오른쪽
-      //남이 보내는건 왼쪽
 
       // [실습1]
       //   function sayMeow() {
