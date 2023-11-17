@@ -63,7 +63,7 @@
         align-self: flex-end;
         /* text-align: right; */
         /* float: right; */
-        background-color: #fff;
+        /* background-color: #fff; */
         padding: 5px;
         border-radius: 8px;
       }
@@ -120,6 +120,10 @@
       .d-none {
         display: none;
       }
+      /* 실습 - DM 기능 추가 */
+      .secret-chat div {
+        background-color: pink;
+      }
     </style>
   </head>
   <body>
@@ -170,29 +174,17 @@
         id = socket.id;
       });
 
-      //   [실습 3-2] 채팅창 입장 문구 socket.id -> nickName
-      function join() {
-        const joinUser = document.querySelector('#nickname');
-        nickName = joinUser.value;
-        socket.emit('setNick', nickName);
-        socket.emit('joinRoom', nickName, id, (res) => {
-          if (res && res.isOk) {
-            console.log('successfully join', res);
-            console.log(res.data);
-            document
-              .querySelector('.chat-list')
-              .insertAdjacentHTML(
-                'beforeend',
-                `<div class="notice">${res.data.chat}</div>`
-              );
-          } else {
-            console.log('fail to join', res);
-          }
-        });
-      }
-      socket.on('error', (data) => {
-        alert(data);
+      // [실습3] 채팅창 입장 문구
+      socket.on('notice', (msg) => {
+        document
+          .querySelector('.chat-list')
+          .insertAdjacentHTML('beforeend', `<div class="notice">${msg}</div>`);
       });
+
+      // [실습3-2] 채팅창 입장 문구 socket.id -> nickname
+      function join() {
+        socket.emit('setNick', document.querySelector('#nickname').value);
+      }
 
       // [실습3-2] 채팅창 입장 문구 socket.id -> nickname
       // 입장 성공: 닉네임 입력창 비활성화
@@ -212,6 +204,9 @@
         //TODO:nickObjs 반복 돌아서 option태그 추가
         //option 태그의 value 속성 값은 socket.id, option 태그의 컨텐츠는 nick 값
         for (let key in nickObjs) {
+          if (key === id) {
+            continue;
+          }
           options += `<option value="${key}">${nickObjs[key]}</option>`;
         }
         document.querySelector('#nick-list').innerHTML = options;
@@ -220,16 +215,18 @@
       //[실습4] 채팅창 메시지 전송 step1
       //"send" 이벤트 전송 {닉네임, 입력창 내용}
       function send() {
-        event.preventDefault();
         const msg = document.querySelector('#message').value;
         //"send" 이벤트 전송 {닉네임, 입력창 내용}
 
         const data = {
+          //전체 : all , 그 외 다른 닉네임:socket.id
+          dm: document.querySelector('#nick-list').value,
           myNick: nickName, //내 닉네임
           msg: document.querySelector('#message').value, //메세지 내용
         };
         socket.emit('send', data);
         document.querySelector('#message').value = ''; //인풋 초기화
+        document.querySelector('#nick-list').value = 'all'; //옵션 초기화
       }
 
       socket.on('newMessage', (data) => {
@@ -258,6 +255,29 @@
           div.classList.add('other-chat');
         }
         divChat.textContent = `${data.nick}:${data.msg}`;
+        div.append(divChat);
+        chatList.append(div);
+
+        //메시지가 많아져서 스크롤이 생기더라도 하단 고정
+        chatList.scrollTop = chatList.scrollHeight;
+      });
+      //귓속말
+      socket.on('dm', (data) => {
+        console.log(data);
+
+        let chatList = document.querySelector('.chat-list');
+        let div = document.createElement('div'); //.my-chat or .other-chat
+        let divChat = document.createElement('div'); //가장 안쪽 div
+        if (data.nick === nickName) {
+          //내 채팅이라면
+          div.classList.add('my-chat');
+          div.classList.add('secret-chat');
+        } else {
+          //다른 사람 채팅이라면
+          div.classList.add('other-chat');
+          div.classList.add('secret-chat');
+        }
+        divChat.textContent = `(귓속말) ${data.nick}:${data.msg}`;
         div.append(divChat);
         chatList.append(div);
 
